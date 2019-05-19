@@ -38,6 +38,8 @@ Der Nutzer stimmt den o.a. Bedingungen, sowie den Lizenzbedingungen ausdrücklic
         * Astrofunktion (z.B. Sonnenaufgang, Sonnenuntergang)
         * Vorgegebene Uhrzeit
         * Zufällige Verzögerung der Ausführungszeit
+        
+Hinweis: Die Astrofunktion hat Vorrang vor der vorgegebenen Uhrzeit. Ist keine Astrofunktion ausgewählt, so wird die vorgegebene Uhrzeit verwendet.
   
 ### 2. Voraussetzungen
 
