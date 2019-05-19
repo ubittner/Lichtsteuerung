@@ -54,7 +54,8 @@ trait LS_timer
         // Set next switch on info
         $date = '';
         if (!empty($timerInfo)) {
-            $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+            $day = date('l', (integer)$timerInfo);
+            $date = $day . ', ' . gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
         }
         $this->SetValue('NextSwitchOnTime', $date);
     }

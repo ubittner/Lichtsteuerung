@@ -43,6 +43,8 @@ Der Nutzer stimmt den o.a. Bedingungen, sowie den Lizenzbedingungen ausdrücklic
 
 - IP-Symcon ab Version 5.1
 
+- Es werden nur Variablen mit dem Ident `STATE` geschaltet. 
+
 ### 3. Software-Installation
 
 - Sie benötigen vom Entwickler entsprechende Zugangsdaten zur Nutzung des Moduls.  
