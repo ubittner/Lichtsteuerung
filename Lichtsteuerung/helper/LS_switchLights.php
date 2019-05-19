@@ -118,12 +118,17 @@ trait LS_switchLights
                     }
                 }
             }
+            if (!$executed) {
+                $this->CheckLightsState();
+            }
+            /*
             if ($State && $executed) {
                 $this->SetValue('Lights', true);
             }
             if (!$State || !$executed) {
                 $this->CheckLightsState();
             }
+            */
         }
     }
 
