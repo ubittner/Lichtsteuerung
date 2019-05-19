@@ -1,0 +1,378 @@
+{
+  "elements": [
+    {
+      "type": "Image",
+      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAAA2CAYAAACocCdYAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAuIwAALiMBeKU/dgAABCdpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIgogICAgICAgICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICAgICAgICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyI+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDx0aWZmOkNvbXByZXNzaW9uPjU8L3RpZmY6Q29tcHJlc3Npb24+CiAgICAgICAgIDx0aWZmOlhSZXNvbHV0aW9uPjMwMDwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WVJlc29sdXRpb24+MzAwPC90aWZmOllSZXNvbHV0aW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+MjIyPC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6Q29sb3JTcGFjZT4xPC9leGlmOkNvbG9yU3BhY2U+CiAgICAgICAgIDxleGlmOlBpeGVsWURpbWVuc2lvbj41NDwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgICAgIDxkYzpzdWJqZWN0PgogICAgICAgICAgICA8cmRmOkJhZy8+CiAgICAgICAgIDwvZGM6c3ViamVjdD4KICAgICAgICAgPHhtcDpNb2RpZnlEYXRlPjIwMTktMDUtMDNUMDc6MDU6ODY8L3htcDpNb2RpZnlEYXRlPgogICAgICAgICA8eG1wOkNyZWF0b3JUb29sPlBpeGVsbWF0b3IgMy44LjI8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CnXpmFwAAARqSURBVHgB7V07jtswEHU+RYpUAXIBIe22e6EAOUQad2lyggC5UOogqTZHiNukSzgLWJLXHEFPnuGQ1CNALE2RM++90UCydmwfDmxUoA0FhgTza+rfUv+d+r9GumAVzIJdOLBRgWYU+JCQ/km9lWTTcAoH4cJGBapXQK4SPSTdORmFy/CietkJcO8KfE4C3HckwsvE5fXzjgiRSp8K3HVI6+5Zh6RIqS8F5OHEm74oHU5MvM4i2iEdeW/UXeOtZnchJaEWFGDitRAlYuxOASZedyEloRYUYOK1ECVi7E4BJl53ISWhVhQ4/0f96V8r/E/tnl9b2UftnP17/a21Nm9IQpWsdUTjoq1H46TZ8Z6HcWobrIB620dxang85mupzYuodUTjoq1H46LZ8Z6HcWobrIB620dxani85h9r81CQhuvlShdR62hFAY2LlV/UDoST7/FQefH1r9KWj/g2sx3iWzCwVaQAE69MMCLrDSN9l1G3QS9MvDJBe1fGTdZLpO8sIE4eDlKrKfemuWZVx+ltP4d9ac4bj7f9JW65Y7XhyWFcmtPwL+3xPKblBYSTVzzPENE2FVAUYOIpwnCaCngqwMTzVJe2qYCiABNPEYbTVMBTASaep7q0TQUUBZh4kzDyVMqiTxan0c9pWHx0UjxacBUbtdWmylNHz67IiU9rAcAt5Xd428971Wc1PJ7zRx2O+xH5MlVPbnPbHrWpc/trxu6CKg7WYJuvUYOi2Ien587mY9iQ0YY5Bu/xj4T5mPpbI+xbzMgnErx5zu1b16bOba8Zb9HIYs8abOMa3mpaSF63jU8J3t+CEKNrUwtSvc3VmIXJzHx8m9Vp99zmfDytKDuaYyg1PpaleOWt9MeC5PbWqqExsvKL2oFxahtQx9p6b/uaX21ew+M5L7ec0W1IAEp9EFYeuFg1NC5WflE7EE55+iMbck2rScutXZrztr/kO3fMG4+3/RynyDlvvpr9KM5aXkA4+R4vKnz0u2sFmHi7Dj/JRynAxItSnn53rQATb9fhJ/koBZh4UcrT764VkB/Jk1q+3M8gQU9pQBW1+kHQjOnyXvl68tICEBlf7amjhtViPpc/i3blivewuMLnYIRPHybrrJLvOp1aXQV/r40k3vcAthE+A2iOLsl3lKLLwaZvchuSFCW/8NS6iBaNpNx6lezki0bocj0aq8vd/q+kNvVX6ptwlqrlk5NQfEU2VKBb1pPv7ZFG9b/d43oLknRfUkcxyvqxyZXPo5avtg9KbhEJ2UO+4yllMkC0vzihTbxfG5EHKfepv099y5XukU/EE6BrKpyhAroCJZJJ9+50RB6usFEBKlBYASZeYcHpjgqIAkw8ngdUIEABJl6A6HRJBZh4PAeoQIACTLwA0ekSUiCy7hMCCiw+MfEAtbg0RIEe61wfmHgh5xKdAgr0WOfaIycgpFzaggJDAimld2gFS63ro2t3W4g5MVaiQKlaYu9kraF2t5KQEkYrCsiVz6OW2DvZsrW7/wG54UW2+HkJHwAAAABJRU5ErkJggg=="
+    },
+    {
+      "type": "Label",
+      "caption": "Ulrich Bittner - Smart System Solutions"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "Licht Steueurung"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "Beschreibung:"
+    },
+    {
+      "type": "Label",
+      "caption": "Mit dieser Instanz kann die Beleuchtung manuell oder automatisch ein- und ausgeschaltet werden."
+    },
+    {
+      "type": "Label",
+      "caption": "Weitere Informationen entnehmen Sie bitte der Dokumentation oder den Hinweisen hier in der Konfiguration."
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Label",
+      "caption": "Konfiguration:"
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "(0) Instanzinformationen",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Symcon Version:\t5.1>"
+        },
+        {
+          "type": "Label",
+          "caption": "Modul Version:\t1.00-1"
+        },
+        {
+          "type": "Label",
+          "caption": "Datum:\t\t\t18. Mai 2019"
+        },
+        {
+          "type": "Label",
+          "caption": "Uhrzeit:\t\t\t18:00"
+        },
+        {
+          "type": "Label",
+          "caption": "Entwickler:\t\tUlrich Bittner"
+        },
+        {
+          "type": "Label",
+          "caption": "Präfix:\t\t\tLS"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "(1) Auslöser",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "(1.1) Einschaltzeit"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie aus, ob eine Einschaltzeit verwendet werden soll:"
+        },
+        {
+          "type": "CheckBox",
+          "name": "UseSwitchOnTime",
+          "caption": "Benutze Einschaltzeit"
+        },
+        {
+          "type": "Label",
+          "caption": "Sie können als Einschaltzeit eine Astrofunktion oder eine manuelle Zeitvorgabe verwenden."
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie die Astrofunktion (z.B. Sonnenuntergang) aus, die Sie verwenden wollen:"
+        },
+        {
+          "type": "SelectVariable",
+          "name": "SwitchOnAstro",
+          "caption": "Astrofunktion"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte geben Sie die Einschaltzeit an, die Sie verwenden wollen:"
+        },
+        {
+          "type": "SelectTime",
+          "name": "SwitchOnTime",
+          "caption": "Einschaltzeit"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie aus, ob eine zufällige Verzögerung der Ausführungszeit verwendet werden soll:"
+        },
+        {
+          "type": "CheckBox",
+          "name": "UseRandomSwitchOnDelay",
+          "caption": "Benutze zufällige Verzögerung"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte geben Sie den Verzögerungszeitraum in Minuten an:"
+        },
+        {
+          "type": "NumberSpinner",
+          "name": "SwitchOnDelay",
+          "caption": "Verzögerung",
+          "suffix": "Minuten"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "Label",
+          "caption": "(1.2) Ausschaltzeit"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie aus, ob eine Ausschaltzeit verwendet werden soll:"
+        },
+        {
+          "type": "CheckBox",
+          "name": "UseSwitchOffTime",
+          "caption": "Benutze Ausschaltzeit"
+        },
+        {
+          "type": "Label",
+          "caption": "Sie können als Ausschaltzeit eine Astrofunktion oder eine manuelle Zeitvorgabe verwenden."
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie die Astrofunktion (z.B. Sonnenaufgang) aus, die Sie verwenden wollen:"
+        },
+        {
+          "type": "SelectVariable",
+          "name": "SwitchOffAstro",
+          "caption": "Astrofunktion"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte geben Sie die Ausschaltzeit an, die Sie verwenden wollen:"
+        },
+        {
+          "type": "SelectTime",
+          "name": "SwitchOffTime",
+          "caption": "Ausschaltzeit"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie aus, ob eine zufällige Verzögerung der Ausführungszeit verwendet werden soll:"
+        },
+        {
+          "type": "CheckBox",
+          "name": "UseRandomSwitchOffDelay",
+          "caption": "Benutze zufällige Verzögerung"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte geben Sie den Verzögerungszeitraum in Minuten an:"
+        },
+        {
+          "type": "NumberSpinner",
+          "name": "SwitchOffDelay",
+          "caption": "Verzögerung",
+          "suffix": "Minuten"
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "(2) Beleuchtung",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Bitte fügen Sie die Beleuchtungsvariablen (STATE) hinzu, welche geschaltet werden sollen oder löschen Sie nicht mehr benötigte Einträge:"
+        },
+        {
+          "type": "List",
+          "name": "Lights",
+          "caption": "Beleuchtung",
+          "rowCount": 10,
+          "add": true,
+          "delete": true,
+          "sort": {
+            "column": "Position",
+            "direction": "ascending"
+          },
+          "columns": [
+            {
+              "name": "Position",
+              "caption": "Position",
+              "width": "100px",
+              "add": "",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "Description",
+              "caption": "Bezeichnung",
+              "width": "350px",
+              "add": "",
+              "edit": {
+                "type": "ValidationTextBox"
+              }
+            },
+            {
+              "name": "VariableID",
+              "caption": "Variable",
+              "width": "auto",
+              "add": 0,
+              "edit": {
+                "type": "SelectVariable"
+              }
+            },
+            {
+              "name": "UseLight",
+              "label": "Benutze Beleuchtung",
+              "width": "200px",
+              "add": true,
+              "edit": {
+                "type": "CheckBox"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "(3) Sicherung/Wiederherstellung",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie die Kategorie für die Sicherung aus:"
+        },
+        {
+          "type": "SelectCategory",
+          "name": "BackupCategory",
+          "caption": "Kategorie"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "Label",
+          "caption": "Hinweis:"
+        },
+        {
+          "type": "Label",
+          "caption": "Nach Übernahme eventueller Änderungen drücken Sie unter Aktionen die Schaltfläche (3) SICHERUNG ERSTELLEN!"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie das gespeicherte Konfigurationsskript für die Wiederherstellung aus:"
+        },
+        {
+          "type": "SelectScript",
+          "name": "Configuration",
+          "caption": "Skript"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "Label",
+          "caption": "Hinweis:"
+        },
+        {
+          "type": "Label",
+          "caption": "Nach Übernahme eventueller Änderungen drücken Sie unter Aktionen die Schaltfläche (3) KONFIGURATION WIEDERHERSTELLEN!"
+        }
+      ]
+    }
+  ],
+  "actions": [
+    {
+      "type": "ExpansionPanel",
+      "caption": "Aktionen",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "(3) Sicherung/Wiederherstellung"
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "Button",
+              "caption": "Sicherung erstellen",
+              "onClick": "LS_CreateBackup($id);"
+            },
+            {
+              "type": "PopupButton",
+              "caption": "Konfiguration wiederherstellen",
+              "popup": {
+                "caption": "Konfiguration wirklich wiederherstellen?",
+                "items": [
+                  {
+                    "type": "Button",
+                    "caption": "Konfiguration wiederherstellen",
+                    "onClick": "LS_RestoreConfiguration($id);"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "Button",
+      "caption": "Bedienungsanleitung",
+      "onClick": "echo 'https://git.ubittner.de/ubittner/Lichtsteuerung';"
+    },
+    {
+      "type": "Label",
+      "caption": " "
+    },
+    {
+      "type": "TestCenter"
+    }
+  ],
+  "status": [
+    {
+      "code": 101,
+      "icon": "active",
+      "caption": "Licht Steuerung wird erstellt"
+    },
+    {
+      "code": 102,
+      "icon": "active",
+      "caption": "Licht Steuerung ist aktiv"
+    },
+    {
+      "code": 103,
+      "icon": "active",
+      "caption": "Licht Steuerung wird gelöscht"
+    },
+    {
+      "code": 104,
+      "icon": "inactive",
+      "caption": "Licht Steuerung ist inaktiv"
+    }
+  ]
+}

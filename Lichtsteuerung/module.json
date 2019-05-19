@@ -1,0 +1,13 @@
+{
+  "id": "{14AE3EA4-76F6-4A36-BE98-628A4CB1EAC7}",
+  "name": "Lichtsteuerung",
+  "type": 3,
+  "vendor": "UBS3",
+  "aliases": [
+    "Lichtsteuerung"
+  ],
+  "parentRequirements": [],
+  "childRequirements": [],
+  "implemented": [],
+  "prefix": "LS"
+}
