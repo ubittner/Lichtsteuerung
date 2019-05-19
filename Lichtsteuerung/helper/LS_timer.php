@@ -54,8 +54,9 @@ trait LS_timer
         // Set next switch on info
         $date = '';
         if (!empty($timerInfo)) {
-            $day = date('l', (integer)$timerInfo);
-            IPS_LogMessage('LightsOn', 'day: ' . $day);
+            $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+            $unixTimestamp = strtotime($date);
+            $day = date("l", $unixTimestamp);
             switch ($day) {
                 case 'Monday':
                     $day = 'Montag';
@@ -79,7 +80,7 @@ trait LS_timer
                     $day = 'Sonntag';
                     break;
             }
-            $date = $day . ', ' . gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+            $date = $day . ', ' . $date;
         }
         $this->SetValue('NextSwitchOnTime', $date);
     }
@@ -133,8 +134,9 @@ trait LS_timer
         // Set next switch off info
         $date = '';
         if (!empty($timerInfo)) {
-            $day = date('l', (integer)$timerInfo);
-            IPS_LogMessage('LightsOff', 'day: ' . $day);
+            $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+            $unixTimestamp = strtotime($date);
+            $day = date("l", $unixTimestamp);
             switch ($day) {
                 case 'Monday':
                     $day = 'Montag';
@@ -158,7 +160,7 @@ trait LS_timer
                     $day = 'Sonntag';
                     break;
             }
-            $date = $day . ', ' . gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+            $date = $day . ', ' . $date;
         }
         $this->SetValue('NextSwitchOffTime', $date);
     }
