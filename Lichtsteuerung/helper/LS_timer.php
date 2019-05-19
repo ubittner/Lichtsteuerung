@@ -55,6 +55,7 @@ trait LS_timer
         $date = '';
         if (!empty($timerInfo)) {
             $day = date('l', (integer)$timerInfo);
+            IPS_LogMessage('LightsOn', 'day: ' . $day);
             switch ($day) {
                 case 'Monday':
                     $day = 'Montag';
@@ -133,6 +134,7 @@ trait LS_timer
         $date = '';
         if (!empty($timerInfo)) {
             $day = date('l', (integer)$timerInfo);
+            IPS_LogMessage('LightsOff', 'day: ' . $day);
             switch ($day) {
                 case 'Monday':
                     $day = 'Montag';
