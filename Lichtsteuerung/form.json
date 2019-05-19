@@ -308,6 +308,15 @@
       "items": [
         {
           "type": "Label",
+          "caption": "(2) Beleuchtung"
+        },
+        {
+          "type": "Button",
+          "caption": "Registrierte Lichter anzeigen",
+          "onClick": "$lights = LS_GetRegisteredLights($id); print_r($lights);"
+        },
+        {
+          "type": "Label",
           "caption": "(3) Sicherung/Wiederherstellung"
         },
         {

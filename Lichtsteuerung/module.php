@@ -109,6 +109,8 @@ class Lichtsteuerung extends IPSModule
             // Set timer
             $this->SetSwitchLightsOnTimer();
             $this->SetSwitchLightsOffTimer();
+            // Register lights
+            $this->RegisterLights();
             // Create Links
             $this->CreateLightsLink();
             // Check lights state
@@ -175,7 +177,6 @@ class Lichtsteuerung extends IPSModule
         foreach ($deadLinks as $linkID => $existingTargetID) {
             if (IPS_LinkExists($linkID)) {
                 IPS_DeleteLink($linkID);
-                $this->UnregisterMessage($existingTargetID, VM_UPDATE);
             }
         }
         // Create new links
@@ -189,7 +190,6 @@ class Lichtsteuerung extends IPSModule
                 IPS_SetIcon($linkID, 'Bulb');
             }
             IPS_SetLinkTargetID($linkID, $targetID);
-            $this->RegisterMessage($targetID, VM_UPDATE);
         }
         // Edit existing links
         $existingLinks = array_intersect($existingTargetIDs, $targetIDs);
@@ -200,7 +200,6 @@ class Lichtsteuerung extends IPSModule
                 IPS_SetName($linkID, $devices[$position - 1]->Description);
                 IPS_SetIcon($linkID, 'Bulb');
             }
-            $this->RegisterMessage($targetID, VM_UPDATE);
         }
     }
 

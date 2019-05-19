@@ -5,6 +5,53 @@ declare(strict_types=1);
 
 trait LS_switchLights
 {
+    ################### Register lights
+
+    /**
+     * Registers the assigned and used lights.
+     */
+    protected function RegisterLights()
+    {
+        // Unregister lights first
+        $registeredVariables = $this->GetMessageList();
+        foreach ($registeredVariables as $id => $registeredVariable) {
+            foreach ($registeredVariable as $messageType) {
+                if ($messageType == VM_UPDATE) {
+                    $this->UnregisterMessage($id, VM_UPDATE);
+                }
+            }
+        }
+        // Register lights
+        $lights = json_decode($this->ReadPropertyString('Lights'));
+        if (!empty($lights)) {
+            foreach ($lights as $light) {
+                $lightID = $light->VariableID;
+                if ($lightID != 0 && IPS_ObjectExists($lightID) && $light->UseLight) {
+                    $this->RegisterMessage($lightID, VM_UPDATE);
+                }
+            }
+        }
+    }
+
+    /**
+     * Gets the registered lights.
+     *
+     * @return array
+     */
+    public function GetRegisteredLights(): array
+    {
+        $registeredLights = [];
+        $registeredVariables = $this->GetMessageList();
+        foreach ($registeredVariables as $id => $registeredVariable) {
+            foreach ($registeredVariable as $messageType) {
+                if ($messageType == VM_UPDATE) {
+                    array_push($registeredLights, $id);
+                }
+            }
+        }
+        return $registeredLights;
+    }
+
     //#################### Automatic mode
 
     /**
