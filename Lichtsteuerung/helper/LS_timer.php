@@ -55,6 +55,29 @@ trait LS_timer
         $date = '';
         if (!empty($timerInfo)) {
             $day = date('l', (integer)$timerInfo);
+            switch ($day) {
+                case 'Monday':
+                    $day = 'Montag';
+                    break;
+                case 'Thuesday':
+                    $day = 'Dienstag';
+                    break;
+                case 'Wednesday':
+                    $day = 'Mittwoch';
+                    break;
+                case 'Thursday':
+                    $day = 'Donnerstag';
+                    break;
+                case 'Friday':
+                    $day = 'Freitag';
+                    break;
+                case 'Saturday':
+                    $day = 'Samstag';
+                    break;
+                case 'Sunday':
+                    $day = 'Sonntag';
+                    break;
+            }
             $date = $day . ', ' . gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
         }
         $this->SetValue('NextSwitchOnTime', $date);
@@ -109,7 +132,31 @@ trait LS_timer
         // Set next switch off info
         $date = '';
         if (!empty($timerInfo)) {
-            $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+            $day = date('l', (integer)$timerInfo);
+            switch ($day) {
+                case 'Monday':
+                    $day = 'Montag';
+                    break;
+                case 'Thuesday':
+                    $day = 'Dienstag';
+                    break;
+                case 'Wednesday':
+                    $day = 'Mittwoch';
+                    break;
+                case 'Thursday':
+                    $day = 'Donnerstag';
+                    break;
+                case 'Friday':
+                    $day = 'Freitag';
+                    break;
+                case 'Saturday':
+                    $day = 'Samstag';
+                    break;
+                case 'Sunday':
+                    $day = 'Sonntag';
+                    break;
+            }
+            $date = $day . ', ' . gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
         }
         $this->SetValue('NextSwitchOffTime', $date);
     }
