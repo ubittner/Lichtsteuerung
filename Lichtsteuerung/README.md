@@ -47,11 +47,11 @@ Der Nutzer stimmt den o.a. Bedingungen, sowie den Lizenzbedingungen ausdrücklic
 
 - Sie benötigen vom Entwickler entsprechende Zugangsdaten zur Nutzung des Moduls.  
 
-- Über das Modul-Control folgende URL hinzufügen: `https://git.ubittner.de/ubittner/LichtSteuerung.git`
+- Über das Modul-Control folgende URL hinzufügen: `https://git.ubittner.de/ubittner/Lichtsteuerung.git`
 
 ### 4. Einrichten der Instanzen in IP-Symcon
 
-- In IP-Symcon an beliebiger Stelle `Instanz hinzufügen` auswählen und `Licht Steuerung` auswählen, welches unter dem Hersteller `UBS3` aufgeführt ist. Es wird eine Instanz angelegt, in der die Eigenschaften zur Steuerung festgelegt werden können.
+- In IP-Symcon an beliebiger Stelle `Instanz hinzufügen` auswählen und `Lichtsteuerung` auswählen, welches unter dem Hersteller `UBS3` aufgeführt ist. Es wird eine Instanz angelegt, in der die Eigenschaften zur Steuerung festgelegt werden können.
 
 __Konfigurationsseite__:
 

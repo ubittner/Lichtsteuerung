@@ -14,7 +14,7 @@
     },
     {
       "type": "Label",
-      "caption": "Licht Steueurung"
+      "caption": "Lichtsteueurung"
     },
     {
       "type": "Label",
@@ -357,22 +357,22 @@
     {
       "code": 101,
       "icon": "active",
-      "caption": "Licht Steuerung wird erstellt"
+      "caption": "Lichtsteuerung wird erstellt"
     },
     {
       "code": 102,
       "icon": "active",
-      "caption": "Licht Steuerung ist aktiv"
+      "caption": "Lichtsteuerung ist aktiv"
     },
     {
       "code": 103,
       "icon": "active",
-      "caption": "Licht Steuerung wird gelöscht"
+      "caption": "Lichtsteuerung wird gelöscht"
     },
     {
       "code": 104,
       "icon": "inactive",
-      "caption": "Licht Steuerung ist inaktiv"
+      "caption": "Lichtsteuerung ist inaktiv"
     }
   ]
 }
