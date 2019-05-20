@@ -7,10 +7,16 @@ trait LS_timer
 {
     protected function SetNextTimer()
     {
+        // Disable timer first
+        $this->SetTimerInterval('SwitchLightsOn', 0);
+        $this->SetTimerInterval('SwitchLightsOff', 0);
         // Check automatic mode
         if (!$this->GetValue('AutomaticMode')) {
-            $this->SetTimerInterval('SwitchLightsOn', 0);
-            $this->SetTimerInterval('SwitchLightsOff', 0);
+            return;
+        }
+        // Check lights
+        $lights = json_decode($this->ReadPropertyString('Lights'));
+        if (empty($lights)) {
             return;
         }
         $now = time();
@@ -88,8 +94,6 @@ trait LS_timer
             }
         }
         if (empty($timestamps)) {
-            $this->SetTimerInterval('SwitchLightsOn', 0);
-            $this->SetTimerInterval('SwitchLightsOff', 0);
             return;
         }
         $this->SendDebug('NextTimer', json_encode($timestamps), 0);
