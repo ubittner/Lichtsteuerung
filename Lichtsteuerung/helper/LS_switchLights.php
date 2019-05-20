@@ -64,8 +64,13 @@ trait LS_switchLights
         // Set automatic mode
         $this->SetValue('AutomaticMode', $State);
 
-        // Set timer
-        $this->SetNextTimer();
+        if ($State) {
+            // Set timer
+            $this->SetNextTimer();
+        } else {
+            $this->SetValue('NextSwitchOnTime', '');
+            $this->SetValue('NextSwitchOffTime', '');
+        }
         //$this->SetSwitchLightsOnTimer();
         //$this->SetSwitchLightsOffTimer();
     }

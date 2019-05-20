@@ -16,7 +16,7 @@ trait LS_timer
         }
         // Check lights
         $lights = json_decode($this->ReadPropertyString('Lights'));
-            if (empty($lights)) {
+        if (empty($lights)) {
             return;
         }
         $now = time();
@@ -108,11 +108,10 @@ trait LS_timer
                 $this->SetTimerInterval('SwitchLightsOn', $timestamps[$key]['interval']);
                 $this->SetTimerInterval('SwitchLightsOff', 0);
                 $timestamp = $timestamps[$key]['timestamp'];
-                //$date = date('d.m.Y, H:i:s', $timestamp);
-                $date = gmdate('d.m.Y, H:i:s', $timestamp);
-                //$unixTimestamp = strtotime($date);
-
-                $day = date("l", $timestamp);
+                $timerInfo = $timestamp + date('Z');
+                $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+                $unixTimestamp = strtotime($date);
+                $day = date("l", $unixTimestamp);
                 switch ($day) {
                     case 'Monday':
                         $day = 'Montag';
@@ -145,10 +144,10 @@ trait LS_timer
                 $this->SetTimerInterval('SwitchLightsOff', $timestamps[$key]['interval']);
                 $this->SetTimerInterval('SwitchLightsOn', 0);
                 $timestamp = $timestamps[$key]['timestamp'];
-                //$timerInfo = $timestamps[$key]['timestamp'];
-                $date = gmdate('d.m.Y, H:i:s', $timestamp);
-                //$unixTimestamp = strtotime($date);
-                $day = date("l", $timestamp);
+                $timerInfo = $timestamp + date('Z');
+                $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+                $unixTimestamp = strtotime($date);
+                $day = date("l", $unixTimestamp);
                 switch ($day) {
                     case 'Monday':
                         $day = 'Montag';
