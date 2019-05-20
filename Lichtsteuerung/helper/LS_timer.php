@@ -16,7 +16,7 @@ trait LS_timer
         }
         // Check lights
         $lights = json_decode($this->ReadPropertyString('Lights'));
-        if (empty($lights)) {
+            if (empty($lights)) {
             return;
         }
         $now = time();
@@ -107,10 +107,12 @@ trait LS_timer
             case 'SwitchOnTime':
                 $this->SetTimerInterval('SwitchLightsOn', $timestamps[$key]['interval']);
                 $this->SetTimerInterval('SwitchLightsOff', 0);
-                $timerInfo = $timestamps[$key]['timestamp'];
-                $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
-                $unixTimestamp = strtotime($date);
-                $day = date("l", $unixTimestamp);
+                $timestamp = $timestamps[$key]['timestamp'];
+                //$date = date('d.m.Y, H:i:s', $timestamp);
+                $date = gmdate('d.m.Y, H:i:s', $timestamp);
+                //$unixTimestamp = strtotime($date);
+
+                $day = date("l", $timestamp);
                 switch ($day) {
                     case 'Monday':
                         $day = 'Montag';
@@ -142,10 +144,11 @@ trait LS_timer
             case 'SwitchOffTime':
                 $this->SetTimerInterval('SwitchLightsOff', $timestamps[$key]['interval']);
                 $this->SetTimerInterval('SwitchLightsOn', 0);
-                $timerInfo = $timestamps[$key]['timestamp'];
-                $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
-                $unixTimestamp = strtotime($date);
-                $day = date("l", $unixTimestamp);
+                $timestamp = $timestamps[$key]['timestamp'];
+                //$timerInfo = $timestamps[$key]['timestamp'];
+                $date = gmdate('d.m.Y, H:i:s', $timestamp);
+                //$unixTimestamp = strtotime($date);
+                $day = date("l", $timestamp);
                 switch ($day) {
                     case 'Monday':
                         $day = 'Montag';
@@ -171,8 +174,8 @@ trait LS_timer
                         break;
                 }
                 $date = $day . ', ' . $date;
-                $this->SetValue('NextSwitchOnTime', $date);
-                $this->SetValue('NextSwitchOffTime', '');
+                $this->SetValue('NextSwitchOnTime', '');
+                $this->SetValue('NextSwitchOffTime', $date);
         }
     }
 
