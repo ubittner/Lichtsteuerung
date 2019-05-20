@@ -67,6 +67,9 @@ class Lichtsteuerung extends IPSModule
         $this->RegisterPropertyInteger('SwitchOffDelay', 30);
         // Lights
         $this->RegisterPropertyString('Lights',  '[]');
+        // Backup / Restore
+        $this->RegisterPropertyInteger('BackupCategory', 0);
+        $this->RegisterPropertyInteger('Configuration', 0);
 
         //#################### Register variables
 
