@@ -108,8 +108,6 @@ class Lichtsteuerung extends IPSModule
         if (IPS_GetInstance($this->InstanceID)['InstanceStatus'] == 102) {
             // Set timer
             $this->SetNextTimer();
-            //$this->SetSwitchLightsOnTimer();
-            //$this->SetSwitchLightsOffTimer();
             // Register lights
             $this->RegisterLights();
             // Create Links

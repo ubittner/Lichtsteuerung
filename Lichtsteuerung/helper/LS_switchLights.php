@@ -71,8 +71,6 @@ trait LS_switchLights
             $this->SetValue('NextSwitchOnTime', '');
             $this->SetValue('NextSwitchOffTime', '');
         }
-        //$this->SetSwitchLightsOnTimer();
-        //$this->SetSwitchLightsOffTimer();
     }
 
     //#################### Switch Lights
