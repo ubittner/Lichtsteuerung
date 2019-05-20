@@ -87,8 +87,17 @@ trait LS_switchLights
             $this->ToggleLight($light->VariableID, $State);
         }
         if ($Trigger == 'Timer') {
-            $this->SetSwitchLightsOnTimer();
-            $this->SetSwitchLightsOffTimer();
+            // Astro
+            $switchOnAstro = $this->ReadPropertyInteger('SwitchOnAstro');
+            $switchOffAstro = $this->ReadPropertyInteger('SwitchOffAstro');
+            if ($switchOnAstro != 0 || $switchOffAstro != 0) {
+                $this->SetNextAstroTimer($State);
+            }
+            // No Astro
+            if ($switchOnAstro == 0 && $switchOffAstro == 0) {
+                $this->SetSwitchLightsOnTimer();
+                $this->SetSwitchLightsOffTimer();
+            }
         }
     }
 
@@ -121,14 +130,6 @@ trait LS_switchLights
             if (!$executed) {
                 $this->CheckLightsState();
             }
-            /*
-            if ($State && $executed) {
-                $this->SetValue('Lights', true);
-            }
-            if (!$State || !$executed) {
-                $this->CheckLightsState();
-            }
-            */
         }
     }
 

@@ -164,4 +164,135 @@ trait LS_timer
         }
         $this->SetValue('NextSwitchOffTime', $date);
     }
+
+    /**
+     * Set the next timer for astro function.
+     *
+     * @param bool $State
+     */
+    public function SetNextAstroTimer(bool $State)
+    {
+        // Switch on
+        if ($State) {
+            // Disable switch on timer
+            $this->SetTimerInterval('SwitchLightsOn', 0);
+            $this->SetValue('NextSwitchOnTime', '');
+            // Set switch off timer
+            if ($this->GetValue('AutomaticMode')) {
+                $now = time();
+                if ($this->ReadPropertyBoolean('UseSwitchOffTime')) {
+                    $switchOffAstro = $this->ReadPropertyInteger('SwitchOffAstro');
+                    if ($switchOffAstro != 0) {
+                        $timestamp = GetValueInteger($switchOffAstro);
+                        $timerInterval = ($timestamp - $now) * 1000;
+                        $timerInfo = $timestamp + date('Z');
+                        // Check random delay
+                        if ($this->ReadPropertyBoolean('UseRandomSwitchOffDelay')) {
+                            $switchOffDelay = $this->ReadPropertyInteger('SwitchOffDelay');
+                            if ($timerInterval != 0 && $switchOffDelay > 0) {
+                                $delay = rand(0, $switchOffDelay * 60000) * 2 - $switchOffDelay * 60000;
+                                $timerInterval = $timerInterval + $delay;
+                                $timerInfo += $delay / 1000;
+                            }
+                        }
+                        // Set timer
+                        $this->SetTimerInterval('SwitchLightsOff', $timerInterval);
+                        // Set next switch off info
+                        $date = '';
+                        if (!empty($timerInfo)) {
+                            $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+                            $unixTimestamp = strtotime($date);
+                            $day = date("l", $unixTimestamp);
+                            switch ($day) {
+                                case 'Monday':
+                                    $day = 'Montag';
+                                    break;
+                                case 'Tuesday':
+                                    $day = 'Dienstag';
+                                    break;
+                                case 'Wednesday':
+                                    $day = 'Mittwoch';
+                                    break;
+                                case 'Thursday':
+                                    $day = 'Donnerstag';
+                                    break;
+                                case 'Friday':
+                                    $day = 'Freitag';
+                                    break;
+                                case 'Saturday':
+                                    $day = 'Samstag';
+                                    break;
+                                case 'Sunday':
+                                    $day = 'Sonntag';
+                                    break;
+                            }
+                            $date = $day . ', ' . $date;
+                        }
+                        $this->SetValue('NextSwitchOffTime', $date);
+                    }
+                }
+            }
+        }
+        // Switch Off
+        if (!$State) {
+            // Disable switch off timer
+            $this->SetTimerInterval('SwitchLightsOff', 0);
+            $this->SetValue('NextSwitchOffTime', '');
+            // Set switch on timer
+            if ($this->GetValue('AutomaticMode')) {
+                $now = time();
+                if ($this->ReadPropertyBoolean('UseSwitchOnTime')) {
+                    $switchOnAstro = $this->ReadPropertyInteger('SwitchOnAstro');
+                    if ($switchOnAstro != 0) {
+                        $timestamp = GetValueInteger($switchOnAstro);
+                        $timerInterval = ($timestamp - $now) * 1000;
+                        $timerInfo = $timestamp + date('Z');
+                        // Check random delay
+                        if ($this->ReadPropertyBoolean('UseRandomSwitchOnDelay')) {
+                            $switchOnDelay = $this->ReadPropertyInteger('SwitchOnDelay');
+                            if ($timerInterval != 0 && $switchOnDelay > 0) {
+                                $delay = rand(0, $switchOnDelay * 60000) * 2 - $switchOnDelay * 60000;
+                                $timerInterval = $timerInterval + $delay;
+                                $timerInfo += $delay / 1000;
+                            }
+                        }
+                        // Set timer
+                        $this->SetTimerInterval('SwitchLightsOn', $timerInterval);
+                        // Set next switch on info
+                        $date = '';
+                        if (!empty($timerInfo)) {
+                            $date = gmdate('d.m.Y, H:i:s', (integer)$timerInfo);
+                            $unixTimestamp = strtotime($date);
+                            $day = date("l", $unixTimestamp);
+                            switch ($day) {
+                                case 'Monday':
+                                    $day = 'Montag';
+                                    break;
+                                case 'Tuesday':
+                                    $day = 'Dienstag';
+                                    break;
+                                case 'Wednesday':
+                                    $day = 'Mittwoch';
+                                    break;
+                                case 'Thursday':
+                                    $day = 'Donnerstag';
+                                    break;
+                                case 'Friday':
+                                    $day = 'Freitag';
+                                    break;
+                                case 'Saturday':
+                                    $day = 'Samstag';
+                                    break;
+                                case 'Sunday':
+                                    $day = 'Sonntag';
+                                    break;
+                            }
+                            $date = $day . ', ' . $date;
+                        }
+                        $this->SetValue('NextSwitchOnTime', $date);
+                    }
+                }
+            }
+        }
+    }
 }
