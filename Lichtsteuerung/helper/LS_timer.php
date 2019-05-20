@@ -61,7 +61,7 @@ trait LS_timer
                 case 'Monday':
                     $day = 'Montag';
                     break;
-                case 'Thuesday':
+                case 'Tuesday':
                     $day = 'Dienstag';
                     break;
                 case 'Wednesday':
@@ -141,7 +141,7 @@ trait LS_timer
                 case 'Monday':
                     $day = 'Montag';
                     break;
-                case 'Thuesday':
+                case 'Tuesday':
                     $day = 'Dienstag';
                     break;
                 case 'Wednesday':
