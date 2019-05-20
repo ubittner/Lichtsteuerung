@@ -72,24 +72,28 @@
     },
     {
       "type": "ExpansionPanel",
-      "caption": "(1) Auslöser",
+      "caption": "(1) Automatik",
       "items": [
         {
           "type": "Label",
-          "caption": "(1.1) Einschaltzeit"
+          "caption": "Für die Schaltvorgänge können Sie eine Astrofunktion oder eine Zeitvorgabe verwenden."
         },
         {
           "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine Einschaltzeit verwendet werden soll:"
+          "caption": "(1.1) Einschalten"
+        },
+        {
+          "type": "Label",
+          "caption": "(1.1.1) Astrofunktion"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie aus, ob eine Astrofunktion verwendet werden soll:"
         },
         {
           "type": "CheckBox",
-          "name": "UseSwitchOnTime",
-          "caption": "Benutze Einschaltzeit"
-        },
-        {
-          "type": "Label",
-          "caption": "Sie können als Einschaltzeit eine Astrofunktion oder eine manuelle Zeitvorgabe verwenden."
+          "name": "UseSwitchOnAstro",
+          "caption": "Benutze Astrofunktion"
         },
         {
           "type": "Label",
@@ -102,16 +106,30 @@
         },
         {
           "type": "Label",
+          "caption": "(1.1.2) Einschaltzeit"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie aus, ob eine Einschaltzeit verwendet werden soll:"
+        },
+        {
+          "type": "CheckBox",
+          "name": "UseSwitchOnTime",
+          "caption": "Benutze Einschaltzeit"
+        },
+        {
+          "type": "Label",
           "caption": "Bitte geben Sie die Einschaltzeit an, die Sie verwenden wollen:"
         },
         {
           "type": "SelectTime",
           "name": "SwitchOnTime",
-          "caption": "Einschaltzeit"
+          "caption": "Einschaltzeit",
+          "suffix": "Uhr"
         },
         {
           "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine zufällige Verzögerung der Ausführungszeit verwendet werden soll:"
+          "caption": "Bitte wählen Sie aus, ob eine zufällige Verzögerung der Einschaltzeit verwendet werden soll:"
         },
         {
           "type": "CheckBox",
@@ -134,20 +152,20 @@
         },
         {
           "type": "Label",
-          "caption": "(1.2) Ausschaltzeit"
+          "caption": "(1.2) Ausschalten"
         },
         {
           "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine Ausschaltzeit verwendet werden soll:"
+          "caption": "(1.2.1) Astrofunktion"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie aus, ob eine Astrofunktion verwendet werden soll:"
         },
         {
           "type": "CheckBox",
-          "name": "UseSwitchOffTime",
-          "caption": "Benutze Ausschaltzeit"
-        },
-        {
-          "type": "Label",
-          "caption": "Sie können als Ausschaltzeit eine Astrofunktion oder eine manuelle Zeitvorgabe verwenden."
+          "name": "UseSwitchOffAstro",
+          "caption": "Benutze Astrofunktion"
         },
         {
           "type": "Label",
@@ -160,16 +178,30 @@
         },
         {
           "type": "Label",
+          "caption": "(1.2.2) Ausschaltzeit"
+        },
+        {
+          "type": "Label",
+          "caption": "Bitte wählen Sie aus, ob eine Ausschaltzeit verwendet werden soll:"
+        },
+        {
+          "type": "CheckBox",
+          "name": "UseSwitchOffTime",
+          "caption": "Benutze Ausschaltzeit"
+        },
+        {
+          "type": "Label",
           "caption": "Bitte geben Sie die Ausschaltzeit an, die Sie verwenden wollen:"
         },
         {
           "type": "SelectTime",
           "name": "SwitchOffTime",
-          "caption": "Ausschaltzeit"
+          "caption": "Ausschaltzeit",
+          "suffix": "Uhr"
         },
         {
           "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine zufällige Verzögerung der Ausführungszeit verwendet werden soll:"
+          "caption": "Bitte wählen Sie aus, ob eine zufällige Verzögerung der Ausschaltzeit verwendet werden soll:"
         },
         {
           "type": "CheckBox",

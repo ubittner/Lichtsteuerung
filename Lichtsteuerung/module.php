@@ -49,20 +49,22 @@ class Lichtsteuerung extends IPSModule
 
         //#################### Register properties
 
-        // Switch on
-        $this->RegisterPropertyBoolean('UseSwitchOnTime', false);
+        // Astro switch on
+        $this->RegisterPropertyBoolean('UseSwitchOnAstro', false);
         $this->RegisterPropertyInteger('SwitchOnAstro', 0);
+        // Time switch on
+        $this->RegisterPropertyBoolean('UseSwitchOnTime', false);
         $this->RegisterPropertyString('SwitchOnTime', '{"hour":22,"minute":30,"second":0}');
         $this->RegisterPropertyBoolean('UseRandomSwitchOnDelay', false);
         $this->RegisterPropertyInteger('SwitchOnDelay', 30);
-
-        // Switch off
-        $this->RegisterPropertyBoolean('UseSwitchOffTime', false);
+        // Astro switch off
+        $this->RegisterPropertyBoolean('UseSwitchOffAstro', false);
         $this->RegisterPropertyInteger('SwitchOffAstro', 0);
+        // Time switch off
+        $this->RegisterPropertyBoolean('UseSwitchOffTime', false);
         $this->RegisterPropertyString('SwitchOffTime', '{"hour":8,"minute":30,"second":0}');
         $this->RegisterPropertyBoolean('UseRandomSwitchOffDelay', false);
         $this->RegisterPropertyInteger('SwitchOffDelay', 30);
-
         // Lights
         $this->RegisterPropertyString('Lights',  '[]');
 
@@ -71,21 +73,19 @@ class Lichtsteuerung extends IPSModule
         // Lights
         $this->RegisterVariableBoolean('Lights', 'Beleuchtung', '~Switch', 1);
         $this->EnableAction('Lights');
-
         // AutomaticMode
         $this->RegisterVariableBoolean('AutomaticMode', 'Automatik', '~Switch', 2);
         IPS_SetIcon($this->GetIDForIdent('AutomaticMode'), 'Clock');
         $this->EnableAction('AutomaticMode');
-
         // Next switch on time
         $this->RegisterVariableString('NextSwitchOnTime', 'Nächste Einschaltzeit', '', 3);
         IPS_SetIcon($this->GetIDForIdent('NextSwitchOnTime'), 'Information');
-
         // Next switch off time
         $this->RegisterVariableString('NextSwitchOffTime', 'Nächste Ausschaltzeit', '', 4);
         IPS_SetIcon($this->GetIDForIdent('NextSwitchOffTime'), 'Information');
 
         //#################### Register timer
+
         $this->RegisterTimer('SwitchLightsOn', 0, 'LS_SwitchLights($_IPS[\'TARGET\'], true, "Timer");');
         $this->RegisterTimer('SwitchLightsOff', 0, 'LS_SwitchLights($_IPS[\'TARGET\'], false, "Timer");');
     }
@@ -107,8 +107,9 @@ class Lichtsteuerung extends IPSModule
         // Check instance
         if (IPS_GetInstance($this->InstanceID)['InstanceStatus'] == 102) {
             // Set timer
-            $this->SetSwitchLightsOnTimer();
-            $this->SetSwitchLightsOffTimer();
+            $this->SetNextTimer();
+            //$this->SetSwitchLightsOnTimer();
+            //$this->SetSwitchLightsOffTimer();
             // Register lights
             $this->RegisterLights();
             // Create Links
