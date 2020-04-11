@@ -38,7 +38,6 @@ trait LS_messageSink
                         }
                     }
                 }
-
                 // Sunset
                 $sunset = json_decode($this->ReadPropertyString('Sunset'), true)[0];
                 if (!empty($sunset)) {
@@ -54,7 +53,6 @@ trait LS_messageSink
                         }
                     }
                 }
-
                 // Is day
                 $id = $this->ReadPropertyInteger('IsDay');
                 if ($id != 0 && @IPS_ObjectExists($id)) {
@@ -65,7 +63,6 @@ trait LS_messageSink
                         }
                     }
                 }
-
                 // Twilight
                 $id = $this->ReadPropertyInteger('TwilightStatus');
                 if ($id != 0 && @IPS_ObjectExists($id)) {
@@ -76,7 +73,6 @@ trait LS_messageSink
                         }
                     }
                 }
-
                 // Presence
                 $id = $this->ReadPropertyInteger('PresenceStatus');
                 if ($id != 0 && @IPS_ObjectExists($id)) {
@@ -87,7 +83,6 @@ trait LS_messageSink
                         }
                     }
                 }
-
                 // Triggers
                 $triggers = json_decode($this->ReadPropertyString('Triggers'), true);
                 if (!empty($triggers)) {
@@ -129,7 +124,6 @@ trait LS_messageSink
     {
         // Unregister first
         $this->UnregisterMessages();
-
         // Sunrise
         $sunrise = json_decode($this->ReadPropertyString('Sunrise'), true)[0];
         if (!empty($sunrise)) {
@@ -140,7 +134,6 @@ trait LS_messageSink
                 }
             }
         }
-
         // Sunset
         $sunset = json_decode($this->ReadPropertyString('Sunset'), true)[0];
         if (!empty($sunset)) {
@@ -151,32 +144,26 @@ trait LS_messageSink
                 }
             }
         }
-
         // Weekly schedule
         $id = $this->ReadPropertyInteger('WeeklySchedule');
         if ($id != 0 && @IPS_ObjectExists($id)) {
             $this->RegisterMessage($id, EM_UPDATE);
         }
-
         // Is day
         $id = $this->ReadPropertyInteger('IsDay');
         if ($id != 0 && @IPS_ObjectExists($id)) {
             $this->RegisterMessage($id, VM_UPDATE);
         }
-
-
         // Twilight status
         $id = $this->ReadPropertyInteger('TwilightStatus');
         if ($id != 0 && @IPS_ObjectExists($id)) {
             $this->RegisterMessage($id, VM_UPDATE);
         }
-
         // Presence status
         $id = $this->ReadPropertyInteger('PresenceStatus');
         if ($id != 0 && @IPS_ObjectExists($id)) {
             $this->RegisterMessage($id, VM_UPDATE);
         }
-
         // Triggers
         $triggers = json_decode($this->ReadPropertyString('Triggers'));
         if (!empty($triggers)) {
