@@ -1,60 +1,36 @@
 {
   "elements": [
     {
-      "type": "Image",
-      "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAN4AAAA2CAYAAACocCdYAAAAAXNSR0IArs4c6QAAAAlwSFlzAAAuIwAALiMBeKU/dgAABCdpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IlhNUCBDb3JlIDUuNC4wIj4KICAgPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4KICAgICAgPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIKICAgICAgICAgICAgeG1sbnM6dGlmZj0iaHR0cDovL25zLmFkb2JlLmNvbS90aWZmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOmV4aWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20vZXhpZi8xLjAvIgogICAgICAgICAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICAgICAgICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyI+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDx0aWZmOkNvbXByZXNzaW9uPjU8L3RpZmY6Q29tcHJlc3Npb24+CiAgICAgICAgIDx0aWZmOlhSZXNvbHV0aW9uPjMwMDwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6WVJlc29sdXRpb24+MzAwPC90aWZmOllSZXNvbHV0aW9uPgogICAgICAgICA8ZXhpZjpQaXhlbFhEaW1lbnNpb24+MjIyPC9leGlmOlBpeGVsWERpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6Q29sb3JTcGFjZT4xPC9leGlmOkNvbG9yU3BhY2U+CiAgICAgICAgIDxleGlmOlBpeGVsWURpbWVuc2lvbj41NDwvZXhpZjpQaXhlbFlEaW1lbnNpb24+CiAgICAgICAgIDxkYzpzdWJqZWN0PgogICAgICAgICAgICA8cmRmOkJhZy8+CiAgICAgICAgIDwvZGM6c3ViamVjdD4KICAgICAgICAgPHhtcDpNb2RpZnlEYXRlPjIwMTktMDUtMDNUMDc6MDU6ODY8L3htcDpNb2RpZnlEYXRlPgogICAgICAgICA8eG1wOkNyZWF0b3JUb29sPlBpeGVsbWF0b3IgMy44LjI8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgPC9yZGY6RGVzY3JpcHRpb24+CiAgIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CnXpmFwAAARqSURBVHgB7V07jtswEHU+RYpUAXIBIe22e6EAOUQad2lyggC5UOogqTZHiNukSzgLWJLXHEFPnuGQ1CNALE2RM++90UCydmwfDmxUoA0FhgTza+rfUv+d+r9GumAVzIJdOLBRgWYU+JCQ/km9lWTTcAoH4cJGBapXQK4SPSTdORmFy/CietkJcO8KfE4C3HckwsvE5fXzjgiRSp8K3HVI6+5Zh6RIqS8F5OHEm74oHU5MvM4i2iEdeW/UXeOtZnchJaEWFGDitRAlYuxOASZedyEloRYUYOK1ECVi7E4BJl53ISWhVhQ4/0f96V8r/E/tnl9b2UftnP17/a21Nm9IQpWsdUTjoq1H46TZ8Z6HcWobrIB620dxang85mupzYuodUTjoq1H46LZ8Z6HcWobrIB620dxani85h9r81CQhuvlShdR62hFAY2LlV/UDoST7/FQefH1r9KWj/g2sx3iWzCwVaQAE69MMCLrDSN9l1G3QS9MvDJBe1fGTdZLpO8sIE4eDlKrKfemuWZVx+ltP4d9ac4bj7f9JW65Y7XhyWFcmtPwL+3xPKblBYSTVzzPENE2FVAUYOIpwnCaCngqwMTzVJe2qYCiABNPEYbTVMBTASaep7q0TQUUBZh4kzDyVMqiTxan0c9pWHx0UjxacBUbtdWmylNHz67IiU9rAcAt5Xd428971Wc1PJ7zRx2O+xH5MlVPbnPbHrWpc/trxu6CKg7WYJuvUYOi2Ien587mY9iQ0YY5Bu/xj4T5mPpbI+xbzMgnErx5zu1b16bOba8Zb9HIYs8abOMa3mpaSF63jU8J3t+CEKNrUwtSvc3VmIXJzHx8m9Vp99zmfDytKDuaYyg1PpaleOWt9MeC5PbWqqExsvKL2oFxahtQx9p6b/uaX21ew+M5L7ec0W1IAEp9EFYeuFg1NC5WflE7EE55+iMbck2rScutXZrztr/kO3fMG4+3/RynyDlvvpr9KM5aXkA4+R4vKnz0u2sFmHi7Dj/JRynAxItSnn53rQATb9fhJ/koBZh4UcrT764VkB/Jk1q+3M8gQU9pQBW1+kHQjOnyXvl68tICEBlf7amjhtViPpc/i3blivewuMLnYIRPHybrrJLvOp1aXQV/r40k3vcAthE+A2iOLsl3lKLLwaZvchuSFCW/8NS6iBaNpNx6lezki0bocj0aq8vd/q+kNvVX6ptwlqrlk5NQfEU2VKBb1pPv7ZFG9b/d43oLknRfUkcxyvqxyZXPo5avtg9KbhEJ2UO+4yllMkC0vzihTbxfG5EHKfepv099y5XukU/EE6BrKpyhAroCJZJJ9+50RB6usFEBKlBYASZeYcHpjgqIAkw8ngdUIEABJl6A6HRJBZh4PAeoQIACTLwA0ekSUiCy7hMCCiw+MfEAtbg0RIEe61wfmHgh5xKdAgr0WOfaIycgpFzaggJDAimld2gFS63ro2t3W4g5MVaiQKlaYu9kraF2t5KQEkYrCsiVz6OW2DvZsrW7/wG54UW2+HkJHwAAAABJRU5ErkJggg=="
-    },
-    {
-      "type": "Label",
-      "caption": "Ulrich Bittner - Smart System Solutions"
-    },
-    {
-      "type": "Label",
-      "caption": " "
-    },
-    {
-      "type": "Label",
-      "caption": "Lichtsteueurung"
-    },
-    {
-      "type": "Label",
-      "caption": " "
-    },
-    {
-      "type": "Label",
-      "caption": "Beschreibung:"
-    },
-    {
-      "type": "Label",
-      "caption": "Mit dieser Instanz kann die Beleuchtung manuell oder automatisch ein- und ausgeschaltet werden."
-    },
-    {
-      "type": "Label",
-      "caption": "Weitere Informationen entnehmen Sie bitte der Dokumentation oder den Hinweisen hier in der Konfiguration."
-    },
-    {
-      "type": "Label",
-      "caption": " "
-    },
-    {
-      "type": "Label",
-      "caption": "Konfiguration:"
-    },
-    {
       "type": "ExpansionPanel",
-      "caption": "(0) Instanzinformationen",
+      "caption": "Instanzinformationen",
       "items": [
         {
-          "type": "Label",
-          "caption": "Symcon Version:\t5.1>"
+          "type": "Image",
+          "image": "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIEAAAAeCAYAAAALkH3GAAAAAXNSR0IArs4c6QAAAMJlWElmTU0AKgAAAAgABwESAAMAAAABAAEAAAEaAAUAAAABAAAAYgEbAAUAAAABAAAAagEoAAMAAAABAAIAAAExAAIAAAARAAAAcgEyAAIAAAAUAAAAhIdpAAQAAAABAAAAmAAAAAAAAABIAAAAAQAAAEgAAAABUGl4ZWxtYXRvciAzLjguOAAAMjAxOToxMTowNiAyMToxMToyNwAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAgaADAAQAAAABAAAAHgAAAAA6fHqWAAAACXBIWXMAAAsTAAALEwEAmpwYAAADqWlUWHRYTUw6Y29tLmFkb2JlLnhtcAAAAAAAPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iWE1QIENvcmUgNS40LjAiPgogICA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogICAgICA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIgogICAgICAgICAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgICAgICAgICAgeG1sbnM6ZXhpZj0iaHR0cDovL25zLmFkb2JlLmNvbS9leGlmLzEuMC8iCiAgICAgICAgICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyI+CiAgICAgICAgIDx0aWZmOlJlc29sdXRpb25Vbml0PjI8L3RpZmY6UmVzb2x1dGlvblVuaXQ+CiAgICAgICAgIDx0aWZmOllSZXNvbHV0aW9uPjcyPC90aWZmOllSZXNvbHV0aW9uPgogICAgICAgICA8dGlmZjpYUmVzb2x1dGlvbj43MjwvdGlmZjpYUmVzb2x1dGlvbj4KICAgICAgICAgPHRpZmY6T3JpZW50YXRpb24+MTwvdGlmZjpPcmllbnRhdGlvbj4KICAgICAgICAgPHRpZmY6Q29tcHJlc3Npb24+NTwvdGlmZjpDb21wcmVzc2lvbj4KICAgICAgICAgPGV4aWY6UGl4ZWxZRGltZW5zaW9uPjMwPC9leGlmOlBpeGVsWURpbWVuc2lvbj4KICAgICAgICAgPGV4aWY6Q29sb3JTcGFjZT4xPC9leGlmOkNvbG9yU3BhY2U+CiAgICAgICAgIDxleGlmOlBpeGVsWERpbWVuc2lvbj4xMjk8L2V4aWY6UGl4ZWxYRGltZW5zaW9uPgogICAgICAgICA8eG1wOkNyZWF0b3JUb29sPlBpeGVsbWF0b3IgMy44Ljg8L3htcDpDcmVhdG9yVG9vbD4KICAgICAgICAgPHhtcDpNb2RpZnlEYXRlPjIwMTktMTEtMDZUMjE6MTE6Mjc8L3htcDpNb2RpZnlEYXRlPgogICAgICA8L3JkZjpEZXNjcmlwdGlvbj4KICAgPC9yZGY6UkRGPgo8L3g6eG1wbWV0YT4KzOjOOwAAA79JREFUaAXtWk2ITlEYvuOn8TOGJhFTxk9kQcrGX5GVBQ1SGCtsMAuxkI2FnbJggaWSjVhIxGxsUGJpkpIiExGZ/MSQzHie+e75Or19955z73fvOd/3dd565rzn3ve873ve93zn705bVKE1KHqBbmBC5VHhf39D4yvgMjBcQ3vwIYq8xaAPCRkFxhzhA+x0AToFH6LIawwGkQ1XA0DZOaGPAPDBB48x4NS/TCTERXWpMBJ88JgHDoJ2kRAX1SnCSPDBYx7K2gSKHIdqI0dgUopzf/HuT/y+DeX0FFn16h+YEVVB2aHxeVjdhzzt2aZIH3zEIU8MbP2sxlRt1mR5qSpRYa6hkDKy/kC0+ZHQ5qqQk3pUXfogmllVi/ShJ6E/yl9V5omDaivLvDHohK88cXxO8Xk8D1mWgwNQ9gQI1BwR+A43+cM9anI3yyDgZc924K1JaXjfUBG4a/ImbU9Qq+0nPNwGPAZm1BIo+NlO6FuRoHM/nr+J3x1CuS/mZTFVPmji+lz4fsPC/2eQUTMAZ4SfQOKeLusgoP3nwB7gDjARKJPmQTlRi6ZpDxeD36jVW5Xl0TpPP7nPSCTb5WA+NGzWtAyAP67VA9vEEbCdCSajjzeBDcCLuL8XUC4H+uN6KMqPwDeYOGth5rUmwxwzf4lkOwioYBZwD1gLfARIXHeWAFtYCVR6BL7CwsmMVnZBvj2tje1yoHT0gOFuU20yeDm0G1CzA9hADRSBBfCl1+RPlplA6VoN5jrA4yIHAXefPDE8BQKVGwFO6zYf235BjienIYCzNTfyiZv4PIMA+qKtwEXgCCsgGtwBnAYClRcBbtB5OjPRQwhsioW+oBwBEq/Psy4Hsd7x4jD+6usT7w6O6QKBb44I1DMI2MMzwF6tq2FvoAWjWdi8y4HqXxuYK8B74BHQitSpdeod+IVaPYnlFbsiruNF3VqWYr/eQcCO8vhxC1gPvARajVZpHeJGOOu3E157J27KNN02bCn2610OlONdYAaAOepBC5Ur0Ze8e52ZaHvOYyys7KfNBLyjVt+ybT4WLYL8fUBfFlIvKeoMzim0H451rKtTl6n5eQgcBPhhhkdiE3GZ5E6eN6yzTcKG93oeDKLV17TfDXB2NtpPGwScxogsxF8N4YL0DakLey77pvcnTx709ka+qOXAaCgING4EOAjGPLg3KmwGHzzmgYOAxzvXJG3Kugt/pE1Zd+2DN/scBDzeuST+6m8Lg8EHz3noQEL4vwFDAKdpJqkM8AJlEOgDJAUfKnf7XvLwH6DaHDNygP4mAAAAAElFTkSuQmCC"
         },
         {
           "type": "Label",
-          "caption": "Modul Version:\t1.00-1"
+          "caption": "Ein Gemeinschaftsprojekt von Normen Thiel und Ulrich Bittner\n"
         },
         {
           "type": "Label",
-          "caption": "Datum:\t\t\t18. Mai 2019"
+          "caption": "Mit dieser Instanz können Lichter ein- und ausgeschaltet werden.\nWeitere Informationen entnehmen Sie bitte der Dokumentation.\n"
+        },
+        {
+          "type": "Label",
+          "caption": "Symcon Version:\t5.3>"
+        },
+        {
+          "type": "Label",
+          "caption": "Name:\t\t\tLichtsteuerung"
+        },
+        {
+          "type": "Label",
+          "caption": "Version:\t\t\t2.00-19"
+        },
+        {
+          "type": "Label",
+          "caption": "Datum:\t\t\t11. April 2020"
         },
         {
           "type": "Label",
@@ -72,189 +48,3265 @@
     },
     {
       "type": "ExpansionPanel",
-      "caption": "(1) Automatik",
+      "caption": "Optionen",
       "items": [
         {
-          "type": "Label",
-          "caption": "Für die Schaltvorgänge können Sie eine Astrofunktion oder eine Zeitvorgabe verwenden."
-        },
-        {
-          "type": "Label",
-          "caption": "(1.1) Einschalten"
-        },
-        {
-          "type": "Label",
-          "caption": "(1.1.1) Astrofunktion"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine Astrofunktion verwendet werden soll:"
+          "type": "CheckBox",
+          "name": "EnableAutomaticMode",
+          "caption": "Automatik"
         },
         {
           "type": "CheckBox",
-          "name": "UseSwitchOnAstro",
-          "caption": "Benutze Astrofunktion"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie die Astrofunktion (z.B. Sonnenuntergang) aus, die Sie verwenden wollen:"
-        },
-        {
-          "type": "SelectVariable",
-          "name": "SwitchOnAstro",
-          "caption": "Astrofunktion"
-        },
-        {
-          "type": "Label",
-          "caption": " "
-        },
-        {
-          "type": "Label",
-          "caption": "(1.1.2) Einschaltzeit"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine Einschaltzeit verwendet werden soll:"
-        },
-        {
-          "type": "CheckBox",
-          "name": "UseSwitchOnTime",
-          "caption": "Benutze Einschaltzeit"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte geben Sie die Einschaltzeit an, die Sie verwenden wollen:"
-        },
-        {
-          "type": "SelectTime",
-          "name": "SwitchOnTime",
-          "caption": "Einschaltzeit",
-          "suffix": "Uhr"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine zufällige Verzögerung der Einschaltzeit verwendet werden soll:"
-        },
-        {
-          "type": "CheckBox",
-          "name": "UseRandomSwitchOnDelay",
-          "caption": "Benutze zufällige Verzögerung"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte geben Sie den Verzögerungszeitraum in Minuten an:"
+          "name": "EnableLight",
+          "caption": "Licht"
         },
         {
           "type": "NumberSpinner",
-          "name": "SwitchOnDelay",
-          "caption": "Verzögerung",
-          "suffix": "Minuten"
+          "name": "LightOffBrightness",
+          "caption": "Aus - Helligkeit",
+          "suffix": "%"
         },
         {
-          "type": "Label",
-          "caption": " "
-        },
-        {
-          "type": "Label",
-          "caption": "(1.2) Ausschalten"
-        },
-        {
-          "type": "Label",
-          "caption": "(1.2.1) Astrofunktion"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine Astrofunktion verwendet werden soll:"
-        },
-        {
-          "type": "CheckBox",
-          "name": "UseSwitchOffAstro",
-          "caption": "Benutze Astrofunktion"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie die Astrofunktion (z.B. Sonnenaufgang) aus, die Sie verwenden wollen:"
-        },
-        {
-          "type": "SelectVariable",
-          "name": "SwitchOffAstro",
-          "caption": "Astrofunktion"
-        },
-        {
-          "type": "Label",
-          "caption": " "
-        },
-        {
-          "type": "Label",
-          "caption": "(1.2.2) Ausschaltzeit"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine Ausschaltzeit verwendet werden soll:"
-        },
-        {
-          "type": "CheckBox",
-          "name": "UseSwitchOffTime",
-          "caption": "Benutze Ausschaltzeit"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte geben Sie die Ausschaltzeit an, die Sie verwenden wollen:"
-        },
-        {
-          "type": "SelectTime",
-          "name": "SwitchOffTime",
-          "caption": "Ausschaltzeit",
-          "suffix": "Uhr"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie aus, ob eine zufällige Verzögerung der Ausschaltzeit verwendet werden soll:"
-        },
-        {
-          "type": "CheckBox",
-          "name": "UseRandomSwitchOffDelay",
-          "caption": "Benutze zufällige Verzögerung"
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte geben Sie den Verzögerungszeitraum in Minuten an:"
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "NumberSpinner",
+              "name": "TimerBrightness",
+              "caption": "Timer - Helligkeit",
+              "suffix": "%"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "NumberSpinner",
+              "name": "TimerDutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "minimum": 0
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
+              "type": "Select",
+              "name": "TimerDutyCycleUnit",
+              "caption": "Einheit",
+              "options": [
+                {
+                  "caption": "Sekunden",
+                  "value": 0
+                },
+                {
+                  "caption": "Minuten",
+                  "value": 1
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "NumberSpinner",
-          "name": "SwitchOffDelay",
-          "caption": "Verzögerung",
-          "suffix": "Minuten"
+          "name": "LightOnBrightness",
+          "caption": "Ein - Helligkeit",
+          "suffix": "%"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableDimmer",
+          "caption": "Helligkeit"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableDimmingPresets",
+          "caption": "Dimmer Voreinstellungen"
+        },
+        {
+          "type": "List",
+          "name": "DimmingPresets",
+          "rowCount": 5,
+          "add": true,
+          "delete": true,
+          "sort": {
+            "column": "DimmingValue",
+            "direction": "ascending"
+          },
+          "columns": [
+            {
+              "name": "DimmingValue",
+              "caption": "Wert",
+              "width": "100px",
+              "add": 0,
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "DimmingText",
+              "caption": "Text",
+              "width": "425px",
+              "add": "",
+              "edit": {
+                "type": "ValidationTextBox"
+              }
+            }
+          ]
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableDutyCycleInfo",
+          "caption": "Einschaltdauer bis"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableNextSwitchingTimeInfo",
+          "caption": "Nächste Schaltzeit"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableSunrise",
+          "caption": "Nächster Sonnenaufgang"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableSunset",
+          "caption": "Nächster Sonnenuntergang"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableWeeklySchedule",
+          "caption": "Nächstes Wochenplanereignis"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableIsDay",
+          "caption": "Ist es Tag"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnableTwilight",
+          "caption": "Dämmerungsstatus"
+        },
+        {
+          "type": "CheckBox",
+          "name": "EnablePresence",
+          "caption": "Anwesenheitsstatus"
         }
       ]
     },
     {
       "type": "ExpansionPanel",
-      "caption": "(2) Beleuchtung",
+      "caption": "Lichter",
       "items": [
         {
           "type": "Label",
-          "caption": "Bitte fügen Sie die Beleuchtungsvariablen (STATE) hinzu, welche geschaltet werden sollen oder löschen Sie nicht mehr benötigte Einträge:"
+          "caption": "Bitte fügen Sie die zu schaltenden Lichter hinzu:"
         },
         {
           "type": "List",
           "name": "Lights",
-          "caption": "Beleuchtung",
           "rowCount": 10,
           "add": true,
           "delete": true,
           "sort": {
-            "column": "Position",
+            "column": "ID",
             "direction": "ascending"
           },
           "columns": [
             {
-              "name": "Position",
-              "caption": "Position",
+              "name": "UseLight",
+              "label": "Aktiviert",
               "width": "100px",
+              "add": true,
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "ID",
+              "caption": "Variable",
+              "width": "400px",
+              "add": 0,
+              "edit": {
+                "type": "SelectVariable"
+              }
+            },
+            {
+              "name": "Description",
+              "caption": "Bezeichnung",
+              "width": "350px",
               "add": "",
               "edit": {
+                "type": "ValidationTextBox"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Schaltzeiten",
+      "items": [
+        {
+          "type": "List",
+          "name": "SwitchingTimeOne",
+          "caption": "Schaltzeit 1",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelSwitchingTimeOne",
+              "caption": "Schaltzeit 1:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "SwitchingTime",
+              "caption": "Schaltzeit",
+              "width": "150px",
+              "edit": {
+                "type": "SelectTime"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
                 "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "SwitchingTimeTwo",
+          "caption": "Schaltzeit 2",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelSwitchingTimeTwo",
+              "caption": "Schaltzeit 2:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "SwitchingTime",
+              "caption": "Schaltzeit",
+              "width": "150px",
+              "edit": {
+                "type": "SelectTime"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "SwitchingTimeThree",
+          "caption": "Schaltzeit 3",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelSwitchingTimeThree",
+              "caption": "Schaltzeit 3:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "SwitchingTime",
+              "caption": "Schaltzeit",
+              "width": "150px",
+              "edit": {
+                "type": "SelectTime"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "SwitchingTimeFour",
+          "caption": "Schaltzeit 4",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelSwitchingTimeFour",
+              "caption": "Schaltzeit 4:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "SwitchingTime",
+              "caption": "Schaltzeit",
+              "width": "150px",
+              "edit": {
+                "type": "SelectTime"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Sonnenaufgang / -untergang",
+      "items": [
+        {
+          "type": "List",
+          "name": "Sunrise",
+          "caption": "Sonnenaufgang",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelSunrise",
+              "caption": "Sonnenaufgang:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "ID",
+              "label": "Variable",
+              "width": "350px",
+              "edit": {
+                "type": "SelectVariable"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "Sunset",
+          "caption": "Sonnenuntergang",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelSunset",
+              "caption": "Sonnenuntergang:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "ID",
+              "label": "Variable",
+              "width": "350px",
+              "edit": {
+                "type": "SelectVariable"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Wochenplan",
+      "items": [
+        {
+          "type": "SelectEvent",
+          "name": "WeeklySchedule",
+          "caption": "Wochenplan"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "WeeklyScheduleActionOne",
+          "caption": "ID 1: Aus",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelWeeklyScheduleAction",
+              "caption": "ID 1: Aus",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "WeeklyScheduleActionTwo",
+          "caption": "ID 2: Timer",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelWeeklyScheduleAction",
+              "caption": "ID 2: Timer",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "WeeklyScheduleActionThree",
+          "caption": "ID 3: An",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelWeeklyScheduleAction",
+              "caption": "ID 3: An",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Ist es Tag",
+      "items": [
+        {
+          "type": "SelectVariable",
+          "name": "IsDay",
+          "caption": "Ist es Tag"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "NightAction",
+          "caption": "Es ist Nacht",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelNightAction",
+              "caption": "Es ist Nacht:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "DayAction",
+          "caption": "Es ist Tag",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabeDayAction",
+              "caption": "Es ist Tag:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Dämmerung",
+      "items": [
+        {
+          "type": "SelectVariable",
+          "name": "TwilightStatus",
+          "caption": "Dämmerungsstatus"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "TwilightDayAction",
+          "caption": "Es ist Tag",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelTwilightDayAction",
+              "caption": "Es ist Tag:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "TwilightNightAction",
+          "caption": "Es ist Nacht",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelTwilightNightAction",
+              "caption": "Es ist Nacht:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "An- / Abwesenheit",
+      "items": [
+        {
+          "type": "SelectVariable",
+          "name": "PresenceStatus",
+          "caption": "Anwesenheitsstatus"
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "AbsenceAction",
+          "caption": "Abwesenheit",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelAbsenceAction",
+              "caption": "Abwesenheit:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "type": "Label",
+          "caption": " "
+        },
+        {
+          "type": "List",
+          "name": "PresenceAction",
+          "caption": "Anwesenheit",
+          "rowCount": 1,
+          "columns": [
+            {
+              "name": "LabelPresenceAction",
+              "caption": "Anwesenheit:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "UseSettings",
+              "label": "Aktiviert",
+              "width": "100px",
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "LabelSwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "150px",
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "ExpansionPanel",
+      "caption": "Allgemeine Auslöser",
+      "items": [
+        {
+          "type": "Label",
+          "caption": "Bitte fügen Sie die Auslöser zum Schalten der Lichter hinzu:"
+        },
+        {
+          "type": "List",
+          "name": "Triggers",
+          "rowCount": 5,
+          "add": true,
+          "delete": true,
+          "sort": {
+            "column": "ID",
+            "direction": "ascending"
+          },
+          "columns": [
+            {
+              "name": "UseSettings",
+              "caption": "Aktiviert",
+              "width": "100px",
+              "add": true,
+              "edit": {
+                "type": "CheckBox"
+              }
+            },
+            {
+              "name": "ID",
+              "caption": "Variable",
+              "width": "400px",
+              "add": 0,
+              "edit": {
+                "type": "SelectVariable"
               }
             },
             {
@@ -267,76 +3319,210 @@
               }
             },
             {
-              "name": "VariableID",
-              "caption": "Variable",
-              "width": "auto",
-              "add": 0,
+              "name": "TriggerValue",
+              "caption": "Auslösender Wert",
+              "width": "160px",
+              "add": 1,
               "edit": {
-                "type": "SelectVariable"
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "0 - false",
+                    "value": 0
+                  },
+                  {
+                    "caption": "1 - true",
+                    "value": 1
+                  }
+                ]
               }
             },
             {
-              "name": "UseLight",
-              "label": "Benutze Beleuchtung",
-              "width": "200px",
-              "add": true,
+              "name": "Brightness",
+              "caption": "Helligkeit",
+              "width": "150px",
+              "add": 0,
               "edit": {
-                "type": "CheckBox"
+                "type": "NumberSpinner",
+                "suffix": " %",
+                "minimum": 0,
+                "maximum": 100
+              }
+            },
+            {
+              "name": "ExecutionDelay",
+              "caption": "Verzögerung",
+              "width": "150px",
+              "add": 0,
+              "edit": {
+                "type": "NumberSpinner",
+                "suffix": " s",
+                "minimum": 0,
+                "maximum": 10
+              }
+            },
+            {
+              "name": "DutyCycle",
+              "caption": "Timer - Einschaltdauer",
+              "width": "200px",
+              "add": 0,
+              "edit": {
+                "type": "NumberSpinner"
+              }
+            },
+            {
+              "name": "DutyCycleUnit",
+              "caption": "Timer - Einheit",
+              "width": "150px",
+              "add": 0,
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Sekunden",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Minuten",
+                    "value": 1
+                  }
+                ]
+              }
+            },
+            {
+              "name": "SwitchingConditions",
+              "caption": "\nSchaltbedingungen:",
+              "width": "150px",
+              "add": "",
+              "visible": false,
+              "edit": {
+                "type": "Label"
+              }
+            },
+            {
+              "name": "CheckAutomaticMode",
+              "caption": "Automatik",
+              "width": "150px",
+              "add": 0,
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "An",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckLight",
+              "caption": "Licht",
+              "width": "150px",
+              "add": 0,
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Aus",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Timer",
+                    "value": 2
+                  },
+                  {
+                    "caption": "Timer - An",
+                    "value": 3
+                  },
+                  {
+                    "caption": "An",
+                    "value": 4
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckIsDay",
+              "caption": "Ist es Tag",
+              "width": "150px",
+              "add": 0,
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckTwilight",
+              "caption": "Dämmerungsstatus",
+              "width": "200px",
+              "add": 0,
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Es ist Tag",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Es ist Nacht",
+                    "value": 2
+                  }
+                ]
+              }
+            },
+            {
+              "name": "CheckPresence",
+              "caption": "Anwesenheitsstatus",
+              "width": "200px",
+              "add": 0,
+              "edit": {
+                "type": "Select",
+                "options": [
+                  {
+                    "caption": "Keine Prüfung",
+                    "value": 0
+                  },
+                  {
+                    "caption": "Abwesenheit",
+                    "value": 1
+                  },
+                  {
+                    "caption": "Anwesenheit",
+                    "value": 2
+                  }
+                ]
               }
             }
           ]
-        }
-      ]
-    },
-    {
-      "type": "ExpansionPanel",
-      "caption": "(3) Sicherung/Wiederherstellung",
-      "items": [
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie die Kategorie für die Sicherung aus:"
-        },
-        {
-          "type": "SelectCategory",
-          "name": "BackupCategory",
-          "caption": "Kategorie"
-        },
-        {
-          "type": "Label",
-          "caption": " "
-        },
-        {
-          "type": "Label",
-          "caption": "Hinweis:"
-        },
-        {
-          "type": "Label",
-          "caption": "Nach Übernahme eventueller Änderungen drücken Sie unter Aktionen die Schaltfläche (3) SICHERUNG ERSTELLEN!"
-        },
-        {
-          "type": "Label",
-          "caption": " "
-        },
-        {
-          "type": "Label",
-          "caption": "Bitte wählen Sie das gespeicherte Konfigurationsskript für die Wiederherstellung aus:"
-        },
-        {
-          "type": "SelectScript",
-          "name": "Configuration",
-          "caption": "Skript"
-        },
-        {
-          "type": "Label",
-          "caption": " "
-        },
-        {
-          "type": "Label",
-          "caption": "Hinweis:"
-        },
-        {
-          "type": "Label",
-          "caption": "Nach Übernahme eventueller Änderungen drücken Sie unter Aktionen die Schaltfläche (3) KONFIGURATION WIEDERHERSTELLEN!"
         }
       ]
     }
@@ -344,39 +3530,54 @@
   "actions": [
     {
       "type": "ExpansionPanel",
-      "caption": "Aktionen",
+      "caption": "Konfiguration",
       "items": [
         {
-          "type": "Label",
-          "caption": "(2) Beleuchtung"
-        },
-        {
           "type": "Button",
-          "caption": "Registrierte Lichter anzeigen",
-          "onClick": "$lights = LS_GetRegisteredLights($id); print_r($lights);"
-        },
-        {
-          "type": "Label",
-          "caption": "(3) Sicherung/Wiederherstellung"
+          "caption": "Neu einlesen",
+          "onClick": "LS_ReloadConfiguration($id);"
         },
         {
           "type": "RowLayout",
           "items": [
             {
+              "type": "SelectCategory",
+              "name": "BackupCategory",
+              "caption": "Kategorie"
+            },
+            {
+              "type": "Label",
+              "caption": " "
+            },
+            {
               "type": "Button",
-              "caption": "Sicherung erstellen",
-              "onClick": "LS_CreateBackup($id);"
+              "caption": "Sichern",
+              "onClick": "LS_CreateBackup($id, $BackupCategory);"
+            }
+          ]
+        },
+        {
+          "type": "RowLayout",
+          "items": [
+            {
+              "type": "SelectScript",
+              "name": "ConfigurationScript",
+              "caption": "Konfigurationsskript"
+            },
+            {
+              "type": "Label",
+              "caption": " "
             },
             {
               "type": "PopupButton",
-              "caption": "Konfiguration wiederherstellen",
+              "caption": "Wiederherstellen",
               "popup": {
                 "caption": "Konfiguration wirklich wiederherstellen?",
                 "items": [
                   {
                     "type": "Button",
-                    "caption": "Konfiguration wiederherstellen",
-                    "onClick": "LS_RestoreConfiguration($id);"
+                    "caption": "Wiederherstellen",
+                    "onClick": "LS_RestoreConfiguration($id, $ConfigurationScript);"
                   }
                 ]
               }
@@ -386,20 +3587,69 @@
       ]
     },
     {
-      "type": "Label",
-      "caption": " "
+      "type": "ExpansionPanel",
+      "caption": "Registrierte Nachrichten",
+      "items": [
+        {
+          "type": "List",
+          "name": "RegisteredMessages",
+          "caption": "Registrierte Nachrichten",
+          "rowCount": 10,
+          "sort": {
+            "column": "Description",
+            "direction": "ascending"
+          },
+          "columns": [
+            {
+              "name": "Description",
+              "caption": "Bezeichnung",
+              "width": "350px"
+            },
+            {
+              "name": "SenderID",
+              "caption": "Sender ID",
+              "width": "110px"
+            },
+            {
+              "name": "SenderName",
+              "caption": "Sender Name",
+              "width": "250px"
+            },
+            {
+              "name": "MessageID",
+              "caption": "Nachrichten ID",
+              "width": "140px"
+            },
+            {
+              "name": "MessageDescription",
+              "caption": "Nachrichten Bezeichnung",
+              "width": "220px"
+            }
+          ]
+        }
+      ]
     },
     {
-      "type": "Button",
-      "caption": "Bedienungsanleitung",
-      "onClick": "echo 'https://git.ubittner.de/ubittner/Lichtsteuerung';"
+      "type": "ExpansionPanel",
+      "caption": "Wochenplan",
+      "items": [
+        {
+          "type": "Button",
+          "caption": "Aktuelle Aktion anzeigen",
+          "onClick": "LS_ShowActualWeeklyScheduleAction($id);"
+        }
+      ]
     },
     {
-      "type": "Label",
-      "caption": " "
-    },
-    {
-      "type": "TestCenter"
+      "type": "ExpansionPanel",
+      "caption": "Beispielskript",
+      "items": [
+        {
+          "type": "Button",
+          "caption": "Beispielskript erstellen",
+          "onClick": "LS_CreateScriptExample($id);"
+        }
+      ]
     }
   ],
   "status": [
@@ -422,6 +3672,11 @@
       "code": 104,
       "icon": "inactive",
       "caption": "Lichtsteuerung ist inaktiv"
+    },
+    {
+      "code": 200,
+      "icon": "inactive",
+      "caption": "Es ist Fehler aufgetreten, weitere Informationen unter Meldungen oder im Log"
     }
   ]
 }

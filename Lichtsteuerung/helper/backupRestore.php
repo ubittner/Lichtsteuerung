@@ -9,17 +9,18 @@ trait LS_backupRestore
 
     /**
      * Creates a backup of the actual configuration into a script.
+     *
+     * @param int $BackupCategory
      */
-    public function CreateBackup()
+    public function CreateBackup(int $BackupCategory): void
     {
         if (IPS_GetInstance($this->InstanceID)['InstanceStatus'] == 102) {
             $name = 'Konfiguration (' . IPS_GetName($this->InstanceID) . ' #' . $this->InstanceID . ') ' . date('d.m.Y H:i:s');
-            $category = $this->ReadPropertyInteger('BackupCategory');
             $config = IPS_GetConfiguration($this->InstanceID);
             // Create backup
             $content = "<?php\n// Backup " . date('d.m.Y, H:i:s') . "\n// " . $this->InstanceID . "\n$" . "config = '" . $config . "';";
             $backupScript = IPS_CreateScript(0);
-            IPS_SetParent($backupScript, $category);
+            IPS_SetParent($backupScript, $BackupCategory);
             IPS_SetName($backupScript, $name);
             IPS_SetHidden($backupScript, true);
             IPS_SetScriptContent($backupScript, $content);
@@ -31,14 +32,15 @@ trait LS_backupRestore
 
     /**
      * Restores a configuration form selected script.
+     *
+     * @param int $ConfigurationScript
      */
-    public function RestoreConfiguration()
+    public function RestoreConfiguration(int $ConfigurationScript): void
     {
-        $backupScript = $this->ReadPropertyInteger('Configuration');
-        if ($backupScript != 0 && IPS_ObjectExists($backupScript)) {
-            $object = IPS_GetObject($backupScript);
+        if ($ConfigurationScript != 0 && IPS_ObjectExists($ConfigurationScript)) {
+            $object = IPS_GetObject($ConfigurationScript);
             if ($object['ObjectType'] == 3) {
-                $content = IPS_GetScriptContent($backupScript);
+                $content = IPS_GetScriptContent($ConfigurationScript);
                 preg_match_all('/\'([^\']+)\'/', $content, $matches);
                 $config = $matches[1][0];
                 IPS_SetConfiguration($this->InstanceID, $config);
