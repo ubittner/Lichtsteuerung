@@ -12,11 +12,11 @@
  * @license     CC BY-NC-SA 4.0
  *              https://creativecommons.org/licenses/by-nc-sa/4.0/
  *
- * @version     2.00-23
- * @date        2020-04-11, 18:00, 1586624400
- * @review      2020-04-11, 18:00
+ * @version     2.00-24
+ * @date        2020-05-08, 18:00, 1588957200
+ * @review      2020-05-08, 18:00
  *
- * @see         https://github.com/ubittnerLichtsteuerung
+ * @see         https://github.com/ubittner/Lichtsteuerung
  *
  * @guids       Library
  *              {46195F9D-0325-41E2-B83B-A1192293BE4E}
@@ -50,6 +50,11 @@ class Lichtsteuerung extends IPSModule
     private const DEVICE_DELAY_MILLISECONDS = 250;
     private const EXECUTION_DELAY_MILLISECONDS = 100;
 
+    /**
+     * Creates this instance.
+     *
+     * @return bool|void
+     */
     public function Create()
     {
         // Never delete this line!
@@ -60,12 +65,19 @@ class Lichtsteuerung extends IPSModule
         $this->CreateProfiles();
         // Register variables
         $this->RegisterVariables();
-        // Register switching timers
-        $this->RegisterSwitchingTimers();
+        // Register sleep mode timer
+        $this->RegisterSleepModeTimer();
         // Register duty cycle timer
         $this->RegisterDutyCycleTimer();
+        // Register switching timers
+        $this->RegisterSwitchingTimers();
     }
 
+    /**
+     * Applys the changes of this instance.
+     *
+     * @return bool|void
+     */
     public function ApplyChanges()
     {
         // Wait until IP-Symcon is started
@@ -78,20 +90,29 @@ class Lichtsteuerung extends IPSModule
         }
         // Register messages
         $this->RegisterMessages();
-        // Set switching timers
-        $this->SetSwitchingTimes();
+        // Dimming presets
+        $this->UpdateDimmingPresets();
         // Create links
         $this->CreateLinks();
         // Set options
         $this->SetOptions();
-        // Dimming presets
-        $this->UpdateDimmingPresets();
+        // Deactivate sleep mode
+        $this->DeactivateSleepModeTimer();
         // Deactivate duty cycle timer
         $this->DeactivateDutyCycleTimer();
-        // Turn light off
-        $this->SwitchLight(0);
+        // Set switching timers
+        $this->SetSwitchingTimes();
+        // Update light status
+        $this->UpdateLightStatus();
+        // Check instance status
+        $this->CheckMaintenanceMode();
     }
 
+    /**
+     * Destroys this instance.
+     *
+     * @return bool|void
+     */
     public function Destroy()
     {
         // Never delete this line!
@@ -100,32 +121,23 @@ class Lichtsteuerung extends IPSModule
         $this->DeleteProfiles();
     }
 
-    private function KernelReady()
-    {
-        $this->ApplyChanges();
-    }
-
-    public function ReloadConfiguration()
+    /**
+     * Reloads the configuration form.
+     */
+    public function ReloadConfiguration(): void
     {
         $this->ReloadForm();
     }
 
+    /**
+     * Gets the configuration form.
+     *
+     * @return false|string
+     */
     public function GetConfigurationForm()
     {
         $formData = json_decode(file_get_contents(__DIR__ . '/form.json'));
-        // Lights
-        $lightVariables = json_decode($this->ReadPropertyString('Lights'));
-        if (!empty($lightVariables)) {
-            foreach ($lightVariables as $variable) {
-                $rowColor = '';
-                $id = $variable->ID;
-                if ($id == 0 || !IPS_ObjectExists($id)) {
-                    $rowColor = '#FFC0C0'; // light red
-                }
-                $formData->elements[2]->items[1]->values[] = ['rowColor' => $rowColor];
-            }
-        }
-        // Trigger
+        // Triggers
         $triggerVariables = json_decode($this->ReadPropertyString('Triggers'));
         if (!empty($triggerVariables)) {
             foreach ($triggerVariables as $variable) {
@@ -179,105 +191,344 @@ class Lichtsteuerung extends IPSModule
         return json_encode($formData);
     }
 
+    /**
+     * Deactivates the sleep mode timer.
+     */
+    public function DeactivateSleepModeTimer(): void
+    {
+        $this->SetValue('SleepMode', false);
+        $this->SetTimerInterval('SleepMode', 0);
+        $this->SetValue('SleepModeTimer', '-');
+    }
+
+    /**
+     * Creates a script example.
+     */
+    public function CreateScriptExample(): void
+    {
+        $scriptID = IPS_CreateScript(0);
+        IPS_SetName($scriptID, 'Beispielskript (Lichtsteuerung #' . $this->InstanceID . ')');
+        $scriptContent = "<?php\n\n// Methode:\n// LS_SwitchLight(integer \$InstanceID, integer \$Brightness, integer \$DutyCycle, integer \$DutyCycleUnit);\n\n### Beispiele:\n\n// Licht ausschalten:\nLS_SwitchLight(" . $this->InstanceID . ", 0, 0, 0);\n\n// Licht für 180 Sekunden einschalten:\nLS_SwitchLight(" . $this->InstanceID . ", 100, 180, 0);\n\n// Licht für 5 Minuten einschalten:\nLS_SwitchLight(" . $this->InstanceID . ", 100, 5, 1);\n\n// Licht mit 50% Helligkeit einschalten:\nLS_SwitchLight(" . $this->InstanceID . ', 50, 0, 0);';
+        IPS_SetScriptContent($scriptID, $scriptContent);
+        IPS_SetParent($scriptID, $this->InstanceID);
+        IPS_SetPosition($scriptID, 100);
+        IPS_SetHidden($scriptID, true);
+        if ($scriptID != 0) {
+            echo 'Beispielskript wurde erfolgreich erstellt!';
+        }
+    }
+
+    /**
+     * Updates the light status
+     */
+    public function UpdateLightStatus(): void
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        $id = $this->ReadPropertyInteger('Light');
+        if ($id != 0 && @IPS_ObjectExists($id)) {
+            $updateStatus = $this->ReadPropertyBoolean('LightUpdateStatus');
+            if (!$updateStatus) {
+                $this->SendDebug(__FUNCTION__, 'Abbruch, die Statusaktualisierung ist deaktiviert!', 0);
+            }
+            $variableType = @IPS_GetVariable($id)['VariableType'];
+            switch ($variableType) {
+                // Boolean
+                case 0:
+                    $actualValue = boolval(GetValue($id));
+                    $mode = intval(0);
+                    $brightness = intval(0);
+                    if ($actualValue) {
+                        $mode = intval(2);
+                        $brightness = intval(100);
+                    }
+                    break;
+
+                // Integer
+                case 1:
+                    $actualValue = intval(GetValue($id));
+                    $mode = intval(0);
+                    $brightness = intval(0);
+                    if ($actualValue > 0) {
+                        $mode = intval(2);
+                        $brightness = intval($actualValue);
+                    }
+                    break;
+
+                // Float
+                case 2:
+                    $actualValue = floatval(GetValue($id));
+                    $mode = intval(0);
+                    $brightness = intval(0);
+                    if ($actualValue > 0) {
+                        $mode = intval(2);
+                        $brightness = intval($actualValue * 100);
+                    }
+                    break;
+
+                default:
+                    $this->SendDebug(__FUNCTION__, 'Abbruch, der Variablentyp wird nicht unterstützt!', 0);
+            }
+            if (isset($mode) && isset($brightness)) {
+                $this->SendDebug(__FUNCTION__, 'Neuer Modus: ' . $mode . ', Neue Helligkeit: ' . $brightness . '%.', 0);
+                $update = true;
+                $actualLightMode = $this->GetValue('LightMode');
+                if ($mode == 2 && $actualLightMode == 1) { // on & timer is running
+                    $update = false;
+                }
+                if ($update) {
+                    if ($actualLightMode != 1) {
+                        $this->SetValue('LightMode', $mode);
+                        $this->SetValue('Dimmer', $brightness);
+                        $this->SetClosestDimmingPreset($brightness);
+                    }
+                }
+                if ($this->ReadPropertyBoolean('LightUpdateLastBrightness')) {
+                    $this->SetValue('LastBrightness', $brightness);
+                }
+            }
+        } else {
+            $this->SendDebug(__FUNCTION__, 'Abbruch, es ist kein Licht zum Schalten vorhanden!', 0);
+        }
+    }
+
     //#################### Request action
 
+    /**
+     * Requests a action via WebFront.
+     *
+     * @param $Ident
+     * @param $Value
+     * @return bool|void
+     */
     public function RequestAction($Ident, $Value)
     {
         switch ($Ident) {
             case 'AutomaticMode':
-                $this->SetValue($Ident, $Value);
+                $this->ToggleAutomaticMode($Value);
                 break;
 
-            case 'Light':
-                switch ($Value) {
-                    // Off
-                    case 0:
-                        $brightness = $this->ReadPropertyInteger('LightOffBrightness');
-                        $this->SwitchLight($brightness, 0, 0);
-                        break;
+            case 'SleepMode':
+                $this->ToggleSleepMode($Value);
+                break;
 
-                    // Timer
-                    case 1:
-                        $brightness = $this->ReadPropertyInteger('TimerBrightness');
-                        $dutyCycle = $this->ReadPropertyInteger('TimerDutyCycle');
-                        $dutyCycleUnit = $this->ReadPropertyInteger('TimerDutyCycleUnit');
-                        $this->SwitchLight($brightness, $dutyCycle, $dutyCycleUnit);
-                        break;
-
-                    // On
-                    case 2:
-                        $brightness = $this->ReadPropertyInteger('LightOnBrightness');
-                        $this->SwitchLight($brightness, 0, 0);
-                        break;
-
-                }
+            case 'LightMode':
+                $this->ExecuteLightMode($Value);
                 break;
 
             case 'Dimmer':
-                $this->SwitchLight(intval($Value * 100), 0, 0);
+                $this->SetDimmer($Value);
                 break;
 
             case 'DimmingPresets':
-                $this->SwitchLight(intval($Value), 0, 0);
+                $this->ExecuteDimmingPreset($Value);
                 break;
 
         }
     }
 
+    /**
+     * Toggles the automatic mode.
+     *
+     * @param bool $State
+     * false    = off
+     * true     = on
+     */
+    public function ToggleAutomaticMode(bool $State): void
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        $this->SetValue('AutomaticMode', $State);
+    }
+
+    /**
+     * Toggles the sleep mode.
+     *
+     * @param bool $State
+     * false    = off
+     * true     = on
+     */
+    public function ToggleSleepMode(bool $State): void
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        $this->SetValue('SleepMode', $State);
+        if ($State) {
+            $this->SetSleepModeTimer();
+        } else {
+            $this->DeactivateSleepModeTimer();
+        }
+    }
+
+    /**
+     * Executes the light mode.
+     *
+     * @param int $Mode
+     * 0    = off
+     * 1    = timer
+     * 2    = on
+     */
+    public function ExecuteLightMode(int $Mode): void
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        switch ($Mode) {
+            // Off
+            case 0:
+                $settings = json_decode($this->ReadPropertyString('LightOff'), true);
+                $action = true;
+                $mode = 0;
+                break;
+
+            // Timer
+            case 1:
+                $settings = json_decode($this->ReadPropertyString('Timer'), true);
+                $action = true;
+                $mode = 1;
+                break;
+
+            // On
+            case 2:
+                $settings = json_decode($this->ReadPropertyString('LightOn'), true);
+                $action = true;
+                $mode = 3;
+                break;
+
+        }
+        // Trigger action
+        if (isset($action) && isset($mode) && $action) {
+            if (!empty($settings)) {
+                foreach ($settings as $setting) {
+                    if ($setting['UseSettings']) {
+                        $brightness = intval($setting['Brightness']);
+                        // Check conditions
+                        $checkConditions = $this->CheckAllConditions(json_encode($setting));
+                        if (!$checkConditions) {
+                            return;
+                        }
+                        $this->SetValue('LightMode', $mode);
+                        if (boolval($setting['UpdateLastBrightness'])) {
+                            $this->SetValue('LastBrightness', $brightness);
+                        }
+                        $duration = 0;
+                        $durationUnit = 0;
+                        if ($mode == 1) { // Timer
+                            $duration = $setting['DutyCycle'];
+                            $durationUnit = $setting['DutyCycleUnit'];
+                        }
+                        $this->SwitchLight($brightness, $duration, $durationUnit);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Sets the dimmer.
+     *
+     * @param int $Brightness
+     */
+    public function SetDimmer(int $Brightness): void
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        if ($this->ReadPropertyBoolean('DimmerUpdateLastBrightness')) {
+            $this->SetValue('LastBrightness', $Brightness);
+        }
+        $this->SwitchLight(intval($Brightness), 0, 0);
+    }
+
+    /**
+     * Executes a preset and switches the light to the brightness.
+     *
+     * @param int $Brightness
+     */
+    public function ExecuteDimmingPreset(int $Brightness): void
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        if ($this->ReadPropertyBoolean('DimmingPresetsUpdateLastBrightness')) {
+            $this->SetValue('LastBrightness', $Brightness);
+        }
+        $this->SwitchLight(intval($Brightness), 0, 0);
+    }
+
     //#################### Private
 
+    /**
+     * Applies the changes if the kernel is ready.
+     */
+    private function KernelReady()
+    {
+        $this->ApplyChanges();
+    }
+
+    /**
+     * Registers the properties.
+     */
     private function RegisterProperties(): void
     {
-        // Visibility
+        // General options
+        $this->RegisterPropertyBoolean('MaintenanceMode', false);
         $this->RegisterPropertyBoolean('EnableAutomaticMode', true);
-        $this->RegisterPropertyBoolean('EnableLight', true);
-        $this->RegisterPropertyInteger('LightOffBrightness', 0);
-        $this->RegisterPropertyInteger('LightOnBrightness', 100);
-        $this->RegisterPropertyInteger('TimerBrightness', 100);
-        $this->RegisterPropertyInteger('TimerDutyCycle', 180);
-        $this->RegisterPropertyInteger('TimerDutyCycleUnit', 0);
+        $this->RegisterPropertyBoolean('EnableSleepMode', true);
+        $this->registerPropertyInteger('SleepDuration', 12);
+        $this->RegisterPropertyBoolean('EnableLightMode', true);
+        $this->RegisterPropertyString('LightOff', '[{"LabelLightOff":"","UseSettings":true,"Brightness":0,"UpdateLastBrightness":false,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckSleepMode":0,"CheckLightMode":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
+        $this->RegisterPropertyString('Timer', '[{"LabelTimer":"","UseSettings":true,"Brightness":50,"UpdateLastBrightness":false,"DutyCycle":30,"DutyCycleUnit":1,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckSleepMode":0,"CheckLightMode":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0,"LabelOperationalAction":"","OperationalAction":0,"DefinedBrightness":0}]');
+        $this->RegisterPropertyString('LightOn', '[{"LabelLightOn":"","UseSettings":true,"Brightness":100,"UpdateLastBrightness":false,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckSleepMode":0,"CheckLightMode":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
         $this->RegisterPropertyBoolean('EnableDimmer', true);
+        $this->RegisterPropertyBoolean('DimmerUpdateLastBrightness', true);
         $this->RegisterPropertyBoolean('EnableDimmingPresets', true);
+        $this->RegisterPropertyBoolean('DimmingPresetsUpdateLastBrightness', true);
         $this->RegisterPropertyString('DimmingPresets', '[{"DimmingValue":0,"DimmingText":"0 %"},{"DimmingValue":25,"DimmingText":"25 %"}, {"DimmingValue":50,"DimmingText":"50 %"},{"DimmingValue":75,"DimmingText":"75 %"},{"DimmingValue":100,"DimmingText":"100 %"}]');
-        $this->RegisterPropertyBoolean('EnableDutyCycleInfo', true);
-        $this->RegisterPropertyBoolean('EnableNextSwitchingTimeInfo', true);
+        $this->RegisterPropertyBoolean('EnableLastBrightness', true);
+        $this->RegisterPropertyBoolean('EnableLastBrightnessManualChange', true);
+        $this->RegisterPropertyBoolean('EnableSleepModeTimer', true);
+        $this->RegisterPropertyBoolean('EnableDutyCycleTimer', true);
+        $this->RegisterPropertyBoolean('EnableNextSwitchingTime', true);
         $this->RegisterPropertyBoolean('EnableSunrise', true);
         $this->RegisterPropertyBoolean('EnableSunset', true);
         $this->RegisterPropertyBoolean('EnableWeeklySchedule', true);
         $this->RegisterPropertyBoolean('EnableIsDay', true);
         $this->RegisterPropertyBoolean('EnableTwilight', true);
         $this->RegisterPropertyBoolean('EnablePresence', true);
-        // Lights
-        $this->RegisterPropertyString('Lights', '[]');
+        $this->RegisterPropertyBoolean('UseMessageSinkDebug', false);
+        // Light
+        $this->RegisterPropertyInteger('Light', 0);
+        $this->RegisterPropertyBoolean('LightUpdateStatus', false);
+        $this->RegisterPropertyBoolean('LightUpdateLastBrightness', false);
         // Switching times
-        $this->RegisterPropertyString('SwitchingTimeOne', '[{"LabelSwitchingTimeOne":"","UseSettings":false,"SwitchingTime":"{\"hour\":0,\"minute\":0,\"second\":0}","Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
-        $this->RegisterPropertyString('SwitchingTimeTwo', '[{"LabelSwitchingTimeTwo":"","UseSettings":false,"SwitchingTime":"{\"hour\":0,\"minute\":0,\"second\":0}","Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
-        $this->RegisterPropertyString('SwitchingTimeThree', '[{"LabelSwitchingTimeThree":"","UseSettings":false,"SwitchingTime":"{\"hour\":0,\"minute\":0,\"second\":0}","Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
-        $this->RegisterPropertyString('SwitchingTimeFour', '[{"LabelSwitchingTimeFour":"","UseSettings":false,"SwitchingTime":"{\"hour\":0,\"minute\":0,\"second\":0}","Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
+        $this->RegisterPropertyString('SwitchingTimeOne', '{"hour":0,"minute":0,"second":0}');
+        $this->RegisterPropertyString('SwitchingTimeOneActions', '[]');
+        $this->RegisterPropertyString('SwitchingTimeTwo', '{"hour":0,"minute":0,"second":0}');
+        $this->RegisterPropertyString('SwitchingTimeTwoActions', '[]');
+        $this->RegisterPropertyString('SwitchingTimeThree', '{"hour":0,"minute":0,"second":0}');
+        $this->RegisterPropertyString('SwitchingTimeThreeActions', '[]');
+        $this->RegisterPropertyString('SwitchingTimeFour', '{"hour":0,"minute":0,"second":0}');
+        $this->RegisterPropertyString('SwitchingTimeFourActions', '[]');
         // Sunrise and sunset
-        $this->RegisterPropertyString('Sunrise', '[{"LabelSunrise":"","UseSettings":false,"ID":0,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
-        $this->RegisterPropertyString('Sunset', '[{"LabelSunset":"","UseSettings":false,"ID":0,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
+        $this->RegisterPropertyInteger('Sunrise', 0);
+        $this->RegisterPropertyString('SunriseActions', '[]');
+        $this->RegisterPropertyInteger('Sunset', 0);
+        $this->RegisterPropertyString('SunsetActions', '[]');
         // Weekly schedule
         $this->RegisterPropertyInteger('WeeklySchedule', 0);
-        $this->RegisterPropertyString('WeeklyScheduleActionOne', '[{"LabelWeeklyScheduleAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
-        $this->RegisterPropertyString('WeeklyScheduleActionTwo', '[{"LabelWeeklyScheduleAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
-        $this->RegisterPropertyString('WeeklyScheduleActionThree', '[{"LabelWeeklyScheduleAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0,"CheckPresence":0}]');
+        $this->RegisterPropertyString('WeeklyScheduleActionOne', '[]');
+        $this->RegisterPropertyString('WeeklyScheduleActionTwo', '[]');
         // Is day
         $this->RegisterPropertyInteger('IsDay', 0);
-        $this->RegisterPropertyString('NightAction', '[{"LabelNightAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckTwilight":0,"CheckPresence":0}]');
-        $this->RegisterPropertyString('DayAction', '[{"LabelDayAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckTwilight":0,"CheckPresence":0}]');
+        $this->RegisterPropertyString('NightAction', '[]');
+        $this->RegisterPropertyString('DayAction', '[]');
         // Twilight
         $this->RegisterPropertyInteger('TwilightStatus', 0);
-        $this->RegisterPropertyString('TwilightDayAction', '[{"LabelTwilightDayAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckPresence":0}]');
-        $this->RegisterPropertyString('TwilightNightAction', '[{"LabelTwilightNightAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckPresence":0}]');
+        $this->RegisterPropertyString('TwilightDayAction', '[]');
+        $this->RegisterPropertyString('TwilightNightAction', '[]');
         // Presence and absence
         $this->RegisterPropertyInteger('PresenceStatus', 0);
-        $this->RegisterPropertyString('AbsenceAction', '[{"LabelAbsenceAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0}]');
-        $this->RegisterPropertyString('PresenceAction', '[{"LabelPresenceAction":"","UseSettings":false,"Brightness":0,"ExecutionDelay":0,"DutyCycle":0,"DutyCycleUnit":0,"LabelSwitchingConditions":"","CheckAutomaticMode":0,"CheckLight":0,"CheckIsDay":0,"CheckTwilight":0}]');
+        $this->RegisterPropertyString('AbsenceAction', '[]');
+        $this->RegisterPropertyString('PresenceAction', '[]');
         // Triggers
         $this->RegisterPropertyString('Triggers', '[]');
     }
 
+    /**
+     * Creates the profiles.
+     */
     private function CreateProfiles(): void
     {
         // Automatic mode
@@ -287,8 +538,15 @@ class Lichtsteuerung extends IPSModule
         }
         IPS_SetVariableProfileAssociation($profile, 0, 'Aus', 'Execute', -1);
         IPS_SetVariableProfileAssociation($profile, 1, 'An', 'Clock', 0x00FF00);
-        // Light
-        $profileName = 'LS.' . $this->InstanceID . '.Light';
+        // Sleep mode
+        $profile = 'LS.' . $this->InstanceID . '.SleepMode';
+        if (!IPS_VariableProfileExists($profile)) {
+            IPS_CreateVariableProfile($profile, 0);
+        }
+        IPS_SetVariableProfileAssociation($profile, 0, 'Aus', 'Sleep', -1);
+        IPS_SetVariableProfileAssociation($profile, 1, 'An', 'Sleep', 0x00FF00);
+        // Light mode
+        $profileName = 'LS.' . $this->InstanceID . '.LightMode';
         if (!IPS_VariableProfileExists($profileName)) {
             IPS_CreateVariableProfile($profileName, 1);
         }
@@ -301,9 +559,12 @@ class Lichtsteuerung extends IPSModule
         if (!IPS_VariableProfileExists($profile)) {
             IPS_CreateVariableProfile($profile, 1);
         }
-        IPS_SetVariableProfileIcon($profile, 'Intensity');
+        IPS_SetVariableProfileIcon($profile, 'Menu');
     }
 
+    /**
+     * Updates the dimming presets.
+     */
     private function UpdateDimmingPresets(): void
     {
         // Dimming presets
@@ -324,9 +585,34 @@ class Lichtsteuerung extends IPSModule
         }
     }
 
+    /**
+     * Sets the dimming preset to the closest value.
+     *
+     * @param int $Brightness
+     */
+    private function SetClosestDimmingPreset(int $Brightness): void
+    {
+        $profile = 'LS.' . $this->InstanceID . '.DimmingPresets';
+        $associations = IPS_GetVariableProfile($profile)['Associations'];
+        if (!empty($associations)) {
+            $closestDimmingPreset = null;
+            foreach ($associations as $association) {
+                if ($closestDimmingPreset === null || abs($Brightness - $closestDimmingPreset) > abs($association['Value'] - $Brightness)) {
+                    $closestDimmingPreset = $association['Value'];
+                }
+            }
+        }
+        if (isset($closestDimmingPreset)) {
+            $this->SetValue('DimmingPresets', $closestDimmingPreset);
+        }
+    }
+
+    /**
+     * Deletes the custom profiles of this instance.
+     */
     private function DeleteProfiles(): void
     {
-        $profiles = ['AutomaticMode', 'Light', 'DimmingPresets'];
+        $profiles = ['AutomaticMode', 'SleepMode', 'LightMode', 'DimmingPresets'];
         foreach ($profiles as $profile) {
             $profileName = 'LS.' . $this->InstanceID . '.' . $profile;
             if (@IPS_VariableProfileExists($profileName)) {
@@ -335,42 +621,57 @@ class Lichtsteuerung extends IPSModule
         }
     }
 
+    /**
+     * Registers the variables.
+     */
     private function RegisterVariables(): void
     {
         // Automatic mode
         $profile = 'LS.' . $this->InstanceID . '.AutomaticMode';
         $this->RegisterVariableBoolean('AutomaticMode', 'Automatik', $profile, 0);
         $this->EnableAction('AutomaticMode');
-        // Light
-        $profile = 'LS.' . $this->InstanceID . '.Light';
-        $this->RegisterVariableInteger('Light', 'Licht', $profile, 1);
-        $this->EnableAction('Light');
+        // Sleep mode
+        $profile = 'LS.' . $this->InstanceID . '.SleepMode';
+        $this->RegisterVariableBoolean('SleepMode', 'Ruhe-Modus', $profile, 1);
+        $this->EnableAction('SleepMode');
+        // Light mode
+        $profile = 'LS.' . $this->InstanceID . '.LightMode';
+        $this->RegisterVariableInteger('LightMode', 'Licht', $profile, 2);
+        $this->EnableAction('LightMode');
         // Dimmer
-        $profile = '~Intensity.1';
-        $this->RegisterVariableFloat('Dimmer', 'Helligkeit', $profile, 2);
+        $profile = '~Intensity.100';
+        $this->RegisterVariableInteger('Dimmer', 'Lichthelligkeit', $profile, 3);
         $this->EnableAction('Dimmer');
         // Dimming presets
         $profile = 'LS.' . $this->InstanceID . '.DimmingPresets';
-        $this->RegisterVariableInteger('DimmingPresets', 'Dimmer Voreinstellungen', $profile, 3);
+        $this->RegisterVariableInteger('DimmingPresets', 'Helligkeit Voreinstellungen', $profile, 4);
         $this->EnableAction('DimmingPresets');
-        // Duty cycle info
-        $this->RegisterVariableString('DutyCycleInfo', 'Einschaltdauer bis', '', 4);
-        $id = $this->GetIDForIdent('DutyCycleInfo');
+        // Last brightness
+        $profile = '~Intensity.100';
+        $this->RegisterVariableInteger('LastBrightness', 'Letzte Helligkeit', $profile, 5);
+        IPS_SetIcon($this->GetIDForIdent('LastBrightness'), 'Information');
+        // Sleep mode timer
+        $this->RegisterVariableString('SleepModeTimer', 'Ruhe-Modus Timer', '', 6);
+        IPS_SetIcon($this->GetIDForIdent('SleepModeTimer'), 'Clock');
+        // Light mode timer
+        $this->RegisterVariableString('DutyCycleTimer', 'Einschaltdauer bis', '', 7);
+        $id = $this->GetIDForIdent('DutyCycleTimer');
         IPS_SetIcon($id, 'Clock');
         // Next switching time
-        $this->RegisterVariableString('NextSwitchingTimeInfo', 'Nächste Schaltzeit', '', 5);
-        IPS_SetIcon($this->GetIDForIdent('NextSwitchingTimeInfo'), 'Information');
+        $this->RegisterVariableString('NextSwitchingTime', 'Nächste Schaltzeit', '', 8);
+        IPS_SetIcon($this->GetIDForIdent('NextSwitchingTime'), 'Information');
     }
 
+    /**
+     * Creates links.
+     */
     private function CreateLinks(): void
     {
         // Sunrise
         $targetID = 0;
-        $sunrise = json_decode($this->ReadPropertyString('Sunrise'), true)[0];
-        if (!empty($sunrise)) {
-            if ($sunrise['UseSettings']) {
-                $targetID = $sunrise['ID'];
-            }
+        $sunrise = $this->ReadPropertyInteger('Sunrise');
+        if ($sunrise != 0 && @IPS_ObjectExists($sunrise)) {
+            $targetID = $sunrise;
         }
         $linkID = @IPS_GetLinkIDByName('Nächster Sonnenaufgang', $this->InstanceID);
         if ($targetID != 0 && @IPS_ObjectExists($targetID)) {
@@ -379,7 +680,7 @@ class Lichtsteuerung extends IPSModule
                 $linkID = IPS_CreateLink();
             }
             IPS_SetParent($linkID, $this->InstanceID);
-            IPS_SetPosition($linkID, 6);
+            IPS_SetPosition($linkID, 9);
             IPS_SetName($linkID, 'Nächster Sonnenaufgang');
             IPS_SetIcon($linkID, 'Sun');
             IPS_SetLinkTargetID($linkID, $targetID);
@@ -390,11 +691,9 @@ class Lichtsteuerung extends IPSModule
         }
         // Sunset
         $targetID = 0;
-        $sunrise = json_decode($this->ReadPropertyString('Sunset'), true)[0];
-        if (!empty($sunrise)) {
-            if ($sunrise['UseSettings']) {
-                $targetID = $sunrise['ID'];
-            }
+        $sunset = $this->ReadPropertyInteger('Sunset');
+        if ($sunset != 0 && @IPS_ObjectExists($sunset)) {
+            $targetID = $sunset;
         }
         $linkID = @IPS_GetLinkIDByName('Nächster Sonnenuntergang', $this->InstanceID);
         if ($targetID != 0 && @IPS_ObjectExists($targetID)) {
@@ -403,7 +702,7 @@ class Lichtsteuerung extends IPSModule
                 $linkID = IPS_CreateLink();
             }
             IPS_SetParent($linkID, $this->InstanceID);
-            IPS_SetPosition($linkID, 7);
+            IPS_SetPosition($linkID, 10);
             IPS_SetName($linkID, 'Nächster Sonnenuntergang');
             IPS_SetIcon($linkID, 'Moon');
             IPS_SetLinkTargetID($linkID, $targetID);
@@ -421,7 +720,7 @@ class Lichtsteuerung extends IPSModule
                 $linkID = IPS_CreateLink();
             }
             IPS_SetParent($linkID, $this->InstanceID);
-            IPS_SetPosition($linkID, 7);
+            IPS_SetPosition($linkID, 11);
             IPS_SetName($linkID, 'Nächstes Wochenplanereignis');
             IPS_SetIcon($linkID, 'Calendar');
             IPS_SetLinkTargetID($linkID, $targetID);
@@ -439,7 +738,7 @@ class Lichtsteuerung extends IPSModule
                 $linkID = IPS_CreateLink();
             }
             IPS_SetParent($linkID, $this->InstanceID);
-            IPS_SetPosition($linkID, 8);
+            IPS_SetPosition($linkID, 12);
             IPS_SetName($linkID, 'Ist es Tag');
             IPS_SetLinkTargetID($linkID, $targetID);
         } else {
@@ -456,7 +755,7 @@ class Lichtsteuerung extends IPSModule
                 $linkID = IPS_CreateLink();
             }
             IPS_SetParent($linkID, $this->InstanceID);
-            IPS_SetPosition($linkID, 9);
+            IPS_SetPosition($linkID, 13);
             IPS_SetName($linkID, 'Dämmerungsstatus');
             IPS_SetLinkTargetID($linkID, $targetID);
         } else {
@@ -473,7 +772,7 @@ class Lichtsteuerung extends IPSModule
                 $linkID = IPS_CreateLink();
             }
             IPS_SetParent($linkID, $this->InstanceID);
-            IPS_SetPosition($linkID, 10);
+            IPS_SetPosition($linkID, 14);
             IPS_SetName($linkID, 'Anwesenheitsstatus');
             IPS_SetLinkTargetID($linkID, $targetID);
         } else {
@@ -483,37 +782,68 @@ class Lichtsteuerung extends IPSModule
         }
     }
 
+    /**
+     * Sets the options.
+     */
     private function SetOptions(): void
     {
         // Automatic mode
         IPS_SetHidden($this->GetIDForIdent('AutomaticMode'), !$this->ReadPropertyBoolean('EnableAutomaticMode'));
-        // Light
-        IPS_SetHidden($this->GetIDForIdent('Light'), !$this->ReadPropertyBoolean('EnableLight'));
+        // Sleep mode
+        IPS_SetHidden($this->GetIDForIdent('SleepMode'), !$this->ReadPropertyBoolean('EnableSleepMode'));
+        // Light mode
+        IPS_SetHidden($this->GetIDForIdent('LightMode'), !$this->ReadPropertyBoolean('EnableLightMode'));
         // Dimmer
         IPS_SetHidden($this->GetIDForIdent('Dimmer'), !$this->ReadPropertyBoolean('EnableDimmer'));
         // Dimming Presets
         IPS_SetHidden($this->GetIDForIdent('DimmingPresets'), !$this->ReadPropertyBoolean('EnableDimmingPresets'));
-        // Duty cycle info
-        IPS_SetHidden($this->GetIDForIdent('DutyCycleInfo'), !$this->ReadPropertyBoolean('EnableDutyCycleInfo'));
-        // Next switching time info
-        $hide = !$this->ReadPropertyBoolean('EnableNextSwitchingTimeInfo');
-        $properties = ['SwitchingTimeOne', 'SwitchingTimeTwo', 'SwitchingTimeThree', 'SwitchingTimeFour'];
-        foreach ($properties as $property) {
-            $use = json_decode($this->ReadPropertyString('SwitchingTimeOne'), true)[0]['UseSettings'];
-            if (!$use) {
-                $hide = true;
+        // Last brightness
+        IPS_SetHidden($this->GetIDForIdent('LastBrightness'), !$this->ReadPropertyBoolean('EnableLastBrightness'));
+        $manualChange = $this->ReadPropertyBoolean('EnableLastBrightnessManualChange');
+        if (!$manualChange) {
+            $this->DisableAction('LastBrightness');
+        } else {
+            $this->EnableAction('LastBrightness');
+        }
+        // Sleep mode timer
+        IPS_SetHidden($this->GetIDForIdent('SleepModeTimer'), !$this->ReadPropertyBoolean('EnableSleepModeTimer'));
+        // Light mode timer
+        IPS_SetHidden($this->GetIDForIdent('DutyCycleTimer'), !$this->ReadPropertyBoolean('EnableDutyCycleTimer'));
+        // Next switching time
+        $hide = !$this->ReadPropertyBoolean('EnableNextSwitchingTime');
+        if (!$hide) {
+            $properties = ['SwitchingTimeOneActions', 'SwitchingTimeTwoActions', 'SwitchingTimeThreeActions', 'SwitchingTimeFourActions'];
+            $hide = true;
+            foreach ($properties as $property) {
+                $actions = json_decode($this->ReadPropertyString($property), true);
+                if (!empty($actions)) {
+                    foreach ($actions as $action) {
+                        $use = $action['UseSettings'];
+                        if ($use) {
+                            $hide = false;
+                        }
+                    }
+                }
             }
         }
-        IPS_SetHidden($this->GetIDForIdent('NextSwitchingTimeInfo'), $hide);
+        IPS_SetHidden($this->GetIDForIdent('NextSwitchingTime'), $hide);
         // Sunrise
         $id = @IPS_GetLinkIDByName('Nächster Sonnenaufgang', $this->InstanceID);
         if ($id !== false) {
             $hide = true;
-            $settings = json_decode($this->ReadPropertyString('Sunrise'), true)[0];
-            $targetID = $settings['ID'];
-            if ($targetID != 0 && @IPS_ObjectExists($targetID)) {
-                if ($settings['UseSettings']) {
-                    $hide = false;
+            $sunrise = false;
+            $sunriseActions = json_decode($this->ReadPropertyString('SunriseActions'), true);
+            if (!empty($sunriseActions)) {
+                foreach ($sunriseActions as $sunriseAction) {
+                    if ($sunriseAction['UseSettings']) {
+                        $sunrise = true;
+                    }
+                }
+            }
+            if ($sunrise) {
+                $sunriseID = $this->ReadPropertyInteger('Sunrise');
+                if ($sunriseID != 0 && @IPS_ObjectExists($sunriseID)) {
+                    $hide = !$this->ReadPropertyBoolean('EnableSunrise');
                 }
             }
             IPS_SetHidden($id, $hide);
@@ -522,11 +852,19 @@ class Lichtsteuerung extends IPSModule
         $id = @IPS_GetLinkIDByName('Nächster Sonnenuntergang', $this->InstanceID);
         if ($id !== false) {
             $hide = true;
-            $settings = json_decode($this->ReadPropertyString('Sunset'), true)[0];
-            $targetID = $settings['ID'];
-            if ($targetID != 0 && @IPS_ObjectExists($targetID)) {
-                if ($settings['UseSettings']) {
-                    $hide = false;
+            $sunset = false;
+            $sunsetActions = json_decode($this->ReadPropertyString('SunriseActions'), true);
+            if (!empty($sunsetActions)) {
+                foreach ($sunsetActions as $sunsetAction) {
+                    if ($sunsetAction['UseSettings']) {
+                        $sunset = true;
+                    }
+                }
+            }
+            if ($sunset) {
+                $sunsetID = $this->ReadPropertyInteger('Sunrise');
+                if ($sunsetID != 0 && @IPS_ObjectExists($sunsetID)) {
+                    $hide = !$this->ReadPropertyBoolean('EnableSunset');
                 }
             }
             IPS_SetHidden($id, $hide);
@@ -587,17 +925,141 @@ class Lichtsteuerung extends IPSModule
         }
     }
 
-    public function CreateScriptExample(): void
+    /**
+     * Registers the sleep mode timer.
+     */
+    private function RegisterSleepModeTimer(): void
     {
-        $scriptID = IPS_CreateScript(0);
-        IPS_SetName($scriptID, 'Beispielskript (Lichtsteuerung #' . $this->InstanceID . ')');
-        $scriptContent = "<?php\n\n// Methode:\n// LS_SwitchLight(integer \$InstanceID, integer \$Brightness, integer \$DutyCycle, integer \$DutyCycleUnit);\n\n### Beispiele:\n\n// Licht ausschalten:\nLS_SwitchLight(" . $this->InstanceID . ", 0, 0, 0);\n\n// Licht für 180 Sekunden einschalten:\nLS_SwitchLight(" . $this->InstanceID . ", 100, 180, 0);\n\n// Licht für 5 Minuten einschalten:\nLS_SwitchLight(" . $this->InstanceID . ", 100, 5, 1);\n\n// Licht mit 50% Helligkeit einschalten:\nLS_SwitchLight(" . $this->InstanceID . ', 50, 0, 0);';
-        IPS_SetScriptContent($scriptID, $scriptContent);
-        IPS_SetParent($scriptID, $this->InstanceID);
-        IPS_SetPosition($scriptID, 100);
-        IPS_SetHidden($scriptID, true);
-        if ($scriptID != 0) {
-            echo 'Beispielskript wurde erfolgreich erstellt!';
+        $this->RegisterTimer('SleepMode', 0, 'LS_DeactivateSleepModeTimer(' . $this->InstanceID . ');');
+    }
+
+    /**
+     * Sets the sleep mode timer.
+     */
+    private function SetSleepModeTimer(): void
+    {
+        $this->SetValue('SleepMode', true);
+        // Duration from hours to seconds
+        $duration = $this->ReadPropertyInteger('SleepDuration') * 60 * 60;
+        // Set timer interval
+        $this->SetTimerInterval('SleepMode', $duration * 1000);
+        $timestamp = time() + $duration;
+        $this->SetValue('SleepModeTimer', date('d.m.Y, H:i:s', ($timestamp)));
+    }
+
+    /**
+     * Checks for maintenance mode.
+     *
+     * @return bool
+     * false    = normal mode
+     * true     = maintenance mode
+     */
+    private function CheckMaintenanceMode(): bool
+    {
+        $result = false;
+        $status = 102;
+        if ($this->ReadPropertyBoolean('MaintenanceMode')) {
+            $result = true;
+            $status = 104;
+            $this->SendDebug(__FUNCTION__, 'Abbruch, der Wartungsmodus ist aktiv!', 0);
+            $this->LogMessage('ID ' . $this->InstanceID . ', ' . __FUNCTION__ . ', Abbruch, der Wartungsmodus ist aktiv!', KL_WARNING);
         }
+        $this->SetStatus($status);
+        IPS_SetDisabled($this->InstanceID, $result);
+        return $result;
+    }
+
+    /**
+     * Checks for a activated action.
+     *
+     * @param string $PropertyVariableName
+     * @param string $PropertyActionName
+     * @return bool
+     * false    = no activated action available
+     * true     = activate action
+     */
+    private function CheckAction(string $PropertyVariableName, string $PropertyActionName): bool
+    {
+        $result = false;
+        $actions = json_decode($this->ReadPropertyString($PropertyActionName), true);
+        if (!empty($actions)) {
+            foreach ($actions as $action) {
+                if ($action['UseSettings']) {
+                    $result = true;
+                }
+            }
+        }
+        if ($result) {
+            $id = $this->ReadPropertyInteger($PropertyVariableName);
+            if ($id == 0 || !@IPS_ObjectExists($id)) {
+                $result = false;
+            }
+        }
+        return $result;
+    }
+
+    /**
+     * Gets a string from timestamp.
+     *
+     * @param int $Timestamp
+     * @return string
+     */
+    private function GetTimeStampString(int $Timestamp): string
+    {
+        $day = date('j', ($Timestamp));
+        $month = date('F', ($Timestamp));
+        switch ($month) {
+            case 'January':
+                $month = 'Januar';
+                break;
+
+            case 'February':
+                $month = 'Februar';
+                break;
+
+            case 'March':
+                $month = 'März';
+                break;
+
+            case 'April':
+                $month = 'April';
+                break;
+
+            case 'May':
+                $month = 'Mai';
+                break;
+
+            case 'June':
+                $month = 'Juni';
+                break;
+
+            case 'July':
+                $month = 'Juli';
+                break;
+
+            case 'August':
+                $month = 'August';
+                break;
+
+            case 'September':
+                $month = 'September';
+                break;
+
+            case 'October':
+                $month = 'Oktober';
+                break;
+
+            case 'November':
+                $month = 'November';
+                break;
+
+            case 'December':
+                $month = 'Dezember';
+                break;
+
+        }
+        $year = date('Y', ($Timestamp));
+        $time = date('H:i:s', ($Timestamp));
+        return $day . '. ' . $month . ' ' . $year . ' ' . $time;
     }
 }

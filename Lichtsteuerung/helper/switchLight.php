@@ -13,18 +13,25 @@ trait LS_switchLight
      * @param int $DutyCycleUnit
      * 0    = seconds
      * 1    = minutes
+     *
+     * @return bool
      */
-    public function SwitchLight(int $Brightness, int $DutyCycle = 0, int $DutyCycleUnit = 0): void
+    public function SwitchLight(int $Brightness, int $DutyCycle = 0, int $DutyCycleUnit = 0): bool
     {
         $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
-        $amount = $this->GetAmountOfLights();
-        if ($amount == 0) {
-            $this->SendDebug(__FUNCTION__, 'Abbruch, es sind keine zu schaltenden Lichter vorhanden!', 0);
-            return;
+        $result = false;
+        if ($this->CheckMaintenanceMode()) {
+            return $result;
         }
-        $actualLightStatus = intval($this->GetValue('Light'));
-        $actualDimmerValue = floatval($this->GetValue('Dimmer'));
+        $id = $this->ReadPropertyInteger('Light');
+        if ($id == 0 || !@IPS_ObjectExists($id)) {
+            $this->SendDebug(__FUNCTION__, 'Abbruch, es ist kein Rollladenaktor vorhanden!', 0);
+            return $result;
+        }
+        $actualLightMode = intval($this->GetValue('LightMode'));
+        $actualDimmerValue = intval($this->GetValue('Dimmer'));
         $actualDimmingPreset = intval($this->GetValue('DimmingPresets'));
+        $actualLastBrightness = intval($this->GetValue('LastBrightness'));
         // Off
         if ($Brightness == 0) {
             $mode = 0;
@@ -35,133 +42,82 @@ trait LS_switchLight
         if ($Brightness > 0 && $DutyCycle != 0) {
             $mode = 1;
             $modeText = 'eingeschaltet (Timer)';
-
-            if ($actualLightStatus == 0) {
-                $this->SetDutyCycleTimer($DutyCycle, $DutyCycleUnit);
-            } else {
-                $this->SetDutyCycleTimer($DutyCycle, $DutyCycleUnit);
-            }
+            $this->SetDutyCycleTimer($DutyCycle, $DutyCycleUnit);
         }
         // On
         if ($Brightness > 0 && $DutyCycle == 0) {
             $mode = 2;
             $modeText = 'eingeschaltet (Ein)';
-            if ($actualLightStatus == 1) {
+            if ($actualLightMode == 1) {
                 $this->DeactivateDutyCycleTimer();
             }
+        }
+        if ($DutyCycle == 0) {
+            $this->DeactivateDutyCycleTimer();
         }
         if (isset($modeText)) {
             $this->SendDebug(__FUNCTION__, 'Alle Lichter werden ' . $modeText . '.', 0);
         }
         if (isset($mode)) {
-            $this->SetValue('Light', $mode);
-            $this->SetValue('Dimmer', $Brightness / 100);
-            $profile = 'LS.' . $this->InstanceID . '.DimmingPresets';
-            $associations = IPS_GetVariableProfile($profile)['Associations'];
-            if (!empty($associations)) {
-                $closestDimmingPreset = null;
-                foreach ($associations as $association) {
-                    if ($closestDimmingPreset === null || abs($Brightness - $closestDimmingPreset) > abs($association['Value'] - $Brightness)) {
-                        $closestDimmingPreset = $association['Value'];
-                    }
+            $this->SetValue('LightMode', $mode);
+            $this->SetValue('Dimmer', $Brightness);
+            $this->SetClosestDimmingPreset($Brightness);
+            if ($id != 0 && @IPS_ObjectExists($id)) {
+                $variableType = @IPS_GetVariable($id)['VariableType'];
+                switch ($variableType) {
+                    // Boolean
+                    case 0:
+                        $actualVariableValue = boolval(GetValue($id));
+                        $newVariableValue = boolval($Brightness);
+                        break;
+
+                    // Integer
+                    case 1:
+                        $actualVariableValue = intval(GetValue($id));
+                        $newVariableValue = intval($Brightness);
+                        break;
+
+                    // Float
+                    case 2:
+                        $actualVariableValue = floatval(GetValue($id));
+                        $newVariableValue = floatval($Brightness / 100);
+                        break;
                 }
-            }
-            if (isset($closestDimmingPreset)) {
-                $this->SetValue('DimmingPresets', $closestDimmingPreset);
-            }
-            $lights = json_decode($this->ReadPropertyString('Lights'));
-            $toggleStatus = [];
-            $i = 0;
-            foreach ($lights as $light) {
-                if ($light->UseLight) {
-                    $id = $light->ID;
-                    if ($id != 0 && @IPS_ObjectExists($id)) {
-                        $toggleStatus[$id] = true;
-                        $i++;
-                        $variableType = @IPS_GetVariable($id)['VariableType'];
-                        switch ($variableType) {
-                            // Boolean
-                            case 0:
-                                $actualVariableValue = boolval(GetValue($id));
-                                $newVariableValue = boolval($Brightness);
-                                break;
-
-                            // Integer
-                            case 1:
-                                $actualVariableValue = intval(GetValue($id));
-                                $newVariableValue = intval($Brightness);
-                                break;
-
-                            // Float
-                            case 2:
-                                $actualVariableValue = floatval(GetValue($id));
-                                $newVariableValue = floatval($Brightness / 100);
-                                break;
+                if (isset($actualVariableValue) && isset($newVariableValue)) {
+                    if ($actualVariableValue == $newVariableValue) {
+                        $this->SendDebug(__FUNCTION__, 'Abbruch, Die Variable ' . $id . ' hat bereits den Wert: ' . json_encode($newVariableValue) . '!', 0);
+                    } else {
+                        $this->SendDebug(__FUNCTION__, 'Variable ' . $id . ', neuer Wert: ' . $newVariableValue . ', Helligkeit: ' . json_encode($Brightness) . '%', 0);
+                        $result = @RequestAction($id, $newVariableValue);
+                        if (!$result) {
+                            IPS_Sleep(self::DEVICE_DELAY_MILLISECONDS);
+                            $result = @RequestAction($id, $newVariableValue);
+                            if (!$result) {
+                                if (isset($modeText)) {
+                                    $this->SendDebug(__FUNCTION__, 'Fehler, das Licht mit der ID ' . $id . ' konnte nicht ' . $modeText . ' werden!', 0);
+                                    IPS_LogMessage(__FUNCTION__, 'Fehler, das Licht mit der ID ' . $id . ' konnte nicht ' . $modeText . ' werden!');
+                                }
+                            }
                         }
-                        if (isset($actualVariableValue) && isset($newVariableValue)) {
-                            if ($actualVariableValue == $newVariableValue) {
-                                $this->SendDebug(__FUNCTION__, 'Abbruch, Die Variable ' . $id . ' hat bereits den Wert: ' . json_encode($newVariableValue) . '!', 0);
-                                continue;
-                            } else {
-                                $this->SendDebug(__FUNCTION__, 'Variable ' . $id . ', neuer Wert: ' . $newVariableValue . ', Helligkeit: ' . json_encode($Brightness) . '%', 0);
-                                $toggle = @RequestAction($id, $newVariableValue);
-                                if (!$toggle) {
-                                    IPS_Sleep(self::DEVICE_DELAY_MILLISECONDS);
-                                    $toggleAgain = @RequestAction($id, $newVariableValue);
-                                    if (!$toggleAgain) {
-                                        $toggleStatus[$id] = false;
-                                        if (isset($modeText)) {
-                                            $this->SendDebug(__FUNCTION__, 'Fehler, das Licht mit der ID ' . $id . ' konnte nicht ' . $modeText . ' werden!', 0);
-                                            IPS_LogMessage(__FUNCTION__, 'Fehler, das Licht mit der ID ' . $id . ' konnte nicht ' . $modeText . ' werden!');
-                                        }
-                                    }
-                                }
-                                if ($i < $amount) {
-                                    $this->SendDebug(__FUNCTION__, 'Die Verzögerung wird ausgeführt.', 0);
-                                    IPS_Sleep(self::DEVICE_DELAY_MILLISECONDS);
-                                }
+                        if (!$result) {
+                            // Revert switch
+                            $this->SetValue('LightMode', $actualLightMode);
+                            $this->SetValue('Dimmer', $actualDimmerValue);
+                            $this->SetValue('DimmingPresets', $actualDimmingPreset);
+                            $this->SetValue('LastBrightness', $actualLastBrightness);
+                        } else {
+                            if (isset($modeText)) {
+                                $this->SendDebug(__FUNCTION__, 'Das Licht wurde ' . $modeText . '.', 0);
                             }
                         }
                     }
                 }
             }
-            if (!in_array(true, $toggleStatus)) {
-                // Revert switch
-                $this->SetValue('Light', $actualLightStatus);
-                $this->SetValue('Dimmer', $actualDimmerValue);
-                $this->SetValue('DimmingPreset', $actualDimmingPreset);
-            }
-            if (in_array(true, $toggleStatus)) {
-                if (isset($modeText)) {
-                    $this->SendDebug(__FUNCTION__, 'Die Lichter wurden ' . $modeText . '.', 0);
-                }
-            }
         }
+        return $result;
     }
 
     //##################### Private
-
-    /**
-     * Gets the amount of lights.
-     *
-     * @return int
-     */
-    private function GetAmountOfLights(): int
-    {
-        $amount = 0;
-        $lights = json_decode($this->ReadPropertyString('Lights'));
-        if (!empty($lights)) {
-            foreach ($lights as $light) {
-                if ($light->UseLight) {
-                    $id = $light->ID;
-                    if ($id != 0 && @IPS_ObjectExists($id)) {
-                        $amount++;
-                    }
-                }
-            }
-        }
-        return $amount;
-    }
 
     /**
      * Registers the duty cycle timer.
@@ -187,7 +143,7 @@ trait LS_switchLight
         }
         $this->SetTimerInterval('SwitchLightOff', $DutyCycle * 1000);
         $timestamp = time() + $DutyCycle;
-        $this->SetValue('DutyCycleInfo', date('d.m.Y, H:i:s', ($timestamp)));
+        $this->SetValue('DutyCycleTimer', $this->GetTimeStampString($timestamp));
         $this->SendDebug(__FUNCTION__, 'Die Einschaltdauer wurde festgelegt.', 0);
     }
 
@@ -198,7 +154,7 @@ trait LS_switchLight
     {
         $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
         $this->SetTimerInterval('SwitchLightOff', 0);
-        $this->SetValue('DutyCycleInfo', '-');
+        $this->SetValue('DutyCycleTimer', '-');
         $this->SendDebug(__FUNCTION__, 'Der Timer wurde deaktiviert.', 0);
     }
 

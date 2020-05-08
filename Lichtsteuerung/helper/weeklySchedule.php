@@ -37,71 +37,70 @@ trait LS_weeklySchedule
         }
     }
 
-    //#################### Private
-
     /**
      * Triggers the action of the weekly schedule.
      */
     public function ExecuteWeeklyScheduleAction(): void
     {
         $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        if ($this->CheckMaintenanceMode()) {
+            return;
+        }
         $this->SendDebug(__FUNCTION__, 'Der Wochenplan hat ausgelöst.', 0);
         // Check event plan
         if (!$this->ValidateWeeklySchedule()) {
             return;
         }
         $actionID = $this->DetermineAction();
+        $variableName = 'WeeklySchedule';
         switch ($actionID) {
             // Off
             case 1:
-                $settings = json_decode($this->ReadPropertyString('WeeklyScheduleActionOne'), true)[0];
-                if (!$settings['UseSettings']) {
-                    $this->SendDebug(__FUNCTION__, 'Abbruch, Wochenplanaktion: 1 = Aus ist deaktiviert!', 0);
+                $actionName = 'WeeklyScheduleActionOne';
+                $action = $this->CheckAction($variableName, $actionName);
+                if (!$action) {
+                    $this->SendDebug(__FUNCTION__, 'Abbruch, Wochenplanaktion: 1 = Aus hat keine aktivierten Aktionen!', 0);
                     return;
                 }
                 $this->SendDebug(__FUNCTION__, 'Wochenplanaktion: 1 = Aus', 0);
                 break;
 
-            // Timer
+            // On
             case 2:
-                $settings = json_decode($this->ReadPropertyString('WeeklyScheduleActionTwo'), true)[0];
-                if (!$settings['UseSettings']) {
-                    $this->SendDebug(__FUNCTION__, 'Abbruch, Wochenplanaktion: 2 = Timer ist deaktiviert!', 0);
+                $actionName = 'WeeklyScheduleActionTwo';
+                $action = $this->CheckAction($variableName, $actionName);
+                if (!$action) {
+                    $this->SendDebug(__FUNCTION__, 'Abbruch, Wochenplanaktion: 2 = An hat keine aktivierten Aktionen!', 0);
                     return;
                 }
-                $this->SendDebug(__FUNCTION__, 'Wochenplanaktion: 2 = Timer', 0);
+                $this->SendDebug(__FUNCTION__, 'Wochenplanaktion: 2 = An', 0);
                 break;
 
-            // On
-            case 3:
-                $settings = json_decode($this->ReadPropertyString('WeeklyScheduleActionThree'), true)[0];
-                if (!$settings['UseSettings']) {
-                    $this->SendDebug(__FUNCTION__, 'Abbruch, Wochenplanaktion: 3 = An ist deaktiviert!', 0);
-                    return;
-                }
-                $this->SendDebug(__FUNCTION__, 'Wochenplanaktion: 3 = An', 0);
-                break;
         }
-        if (isset($settings)) {
-            // Check conditions
-            $conditions = [
-                ['type' => 0, 'condition' => $settings['CheckAutomaticMode']],
-                ['type' => 1, 'condition' => $settings['CheckLight']],
-                ['type' => 2, 'condition' => $settings['CheckIsDay']],
-                ['type' => 3, 'condition' => $settings['CheckTwilight']],
-                ['type' => 4, 'condition' => $settings['CheckPresence']]];
-            $checkConditions = $this->CheckConditions(json_encode($conditions));
-            if (!$checkConditions) {
-                return;
+        if (isset($actionName)) {
+            $settings = json_decode($this->ReadPropertyString($actionName), true);
+            if (!empty($settings)) {
+                foreach ($settings as $setting) {
+                    if ($setting['UseSettings']) {
+                        // Check conditions
+                        $checkConditions = $this->CheckAllConditions(json_encode($setting));
+                        if (!$checkConditions) {
+                            continue;
+                        }
+                        // Trigger action
+                        $brightness = $setting['Brightness'];
+                        if ($setting['UpdateLastBrightness']) {
+                            $this->SetValue('LastBrightness', $brightness);
+                        }
+                        $this->TriggerExecutionDelay(intval($setting['ExecutionDelay']));
+                        $this->SwitchLight($brightness, 0, 0);
+                    }
+                }
             }
-            // Trigger action
-            $this->TriggerExecutionDelay(intval($settings['ExecutionDelay']));
-            $brightness = $settings['Brightness'];
-            $dutyCycle = $settings['DutyCycle'];
-            $dutyCycleUnit = $settings['DutyCycleUnit'];
-            $this->SwitchLight($brightness, $dutyCycle, $dutyCycleUnit);
         }
     }
+
+    //#################### Private
 
     /**
      * Determines the action from the weekly schedule.

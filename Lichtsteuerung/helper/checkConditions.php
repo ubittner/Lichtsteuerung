@@ -5,15 +5,42 @@ declare(strict_types=1);
 
 trait LS_checkConditions
 {
+    //#################### Private
+
+    /**
+     * Checks all conditions.
+     *
+     * @param string $Settings
+     * @return bool
+     * false    = mismatch
+     * true     = condition is valid
+     *
+     */
+    private function CheckAllConditions(string $Settings): bool
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        // Check conditions
+        $setting = json_decode($Settings, true);
+        $conditions = [
+            ['type' => 0, 'condition' => $setting['CheckAutomaticMode']],
+            ['type' => 1, 'condition' => $setting['CheckSleepMode']],
+            ['type' => 2, 'condition' => $setting['CheckLightMode']],
+            ['type' => 3, 'condition' => $setting['CheckIsDay']],
+            ['type' => 4, 'condition' => $setting['CheckTwilight']],
+            ['type' => 5, 'condition' => $setting['CheckPresence']]];
+        return $this->CheckConditions(json_encode($conditions));
+    }
+
     /**
      * Checks the conditions.
      *
      * @param string $Conditions
      * 0    = automatic mode
-     * 1    = light
-     * 2    = is day
-     * 3    = twilight
-     * 4    = presence
+     * 1    = sleep mode
+     * 2    = light mode
+     * 3    = is day
+     * 4    = twilight
+     * 5    = presence
      *
      * @return bool
      * false    = mismatch
@@ -34,26 +61,32 @@ trait LS_checkConditions
                         $results[$condition['type']] = $checkAutomaticMode;
                         break;
 
-                    // Light
+                    // Sleep mode
                     case 1:
-                        $checkLight = $this->CheckLightCondition($condition['condition']);
+                        $checkSleepMode = $this->CheckSleepModeCondition($condition['condition']);
+                        $results[$condition['type']] = $checkSleepMode;
+                        break;
+
+                    // Light mode
+                    case 2:
+                        $checkLight = $this->CheckLightModeCondition($condition['condition']);
                         $results[$condition['type']] = $checkLight;
                         break;
 
                     // Is day
-                    case 2:
+                    case 3:
                         $checkIsDay = $this->CheckIsDayCondition($condition['condition']);
                         $results[$condition['type']] = $checkIsDay;
                         break;
 
                     // Twilight
-                    case 3:
+                    case 4:
                         $checkTwilight = $this->CheckTwilightCondition($condition['condition']);
                         $results[$condition['type']] = $checkTwilight;
                         break;
 
                     // Presence
-                    case 4:
+                    case 5:
                         $checkPresence = $this->CheckPresenceCondition($condition['condition']);
                         $results[$condition['type']] = $checkPresence;
                         break;
@@ -108,6 +141,46 @@ trait LS_checkConditions
     }
 
     /**
+     * Checks the sleep mode condition.
+     *
+     * @param int $Condition
+     * 0    = none
+     * 1    = automatic mode must be off
+     * 2    = automatic mode must be on
+     *
+     * @return bool
+     * false    = mismatch
+     * true     = condition is valid
+     */
+    private function CheckSleepModeCondition(int $Condition): bool
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        $result = true;
+        $sleepMode = boolval($this->GetValue('SleepMode')); // false = sleep mode is off, true = sleep mode is on
+        switch ($Condition) {
+            // Sleep mode must be off
+            case 1:
+                if ($sleepMode) { // Sleep mode is on
+                    $this->SendDebug(__FUNCTION__, 'Bedingung: 1 = Aus', 0);
+                    $this->SendDebug(__FUNCTION__, 'Abbruch, der Ruhe-Modus ist eingeschaltet!', 0);
+                    $result = false;
+                }
+                break;
+
+            // Sleep mode must be on
+            case 2:
+                if (!$sleepMode) { // Sleep mode is off
+                    $this->SendDebug(__FUNCTION__, 'Bedingung: 2 = An', 0);
+                    $this->SendDebug(__FUNCTION__, 'Abbruch, der Ruhe-Modus ist ausgeschaltet!', 0);
+                    $result = false;
+                }
+                break;
+
+        }
+        return $result;
+    }
+
+    /**
      * Checks the light condition.
      *
      * @param int $Condition
@@ -122,11 +195,11 @@ trait LS_checkConditions
      * true     = condition is valid
      *
      */
-    private function CheckLightCondition(int $Condition): bool
+    private function CheckLightModeCondition(int $Condition): bool
     {
         $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
         $result = true;
-        $lightStatus = intval($this->GetValue('Light')); // false = light is off, true = light is on
+        $lightStatus = intval($this->GetValue('LightMode')); // false = light is off, true = light is on
         switch ($Condition) {
             // Light must be off
             case 1:

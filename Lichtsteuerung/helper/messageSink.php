@@ -7,7 +7,10 @@ trait LS_messageSink
 {
     public function MessageSink($TimeStamp, $SenderID, $Message, $Data)
     {
-        $this->SendDebug(__FUNCTION__, 'SenderID: ' . $SenderID . ', Message: ' . $Message . ', Data: ' . print_r($Data, true), 0);
+        if ($this->CheckMaintenanceMode()) {
+            return;
+        }
+        $this->SendDebug(__FUNCTION__, $TimeStamp . ', SenderID: ' . $SenderID . ', Message: ' . $Message . ', Data: ' . print_r($Data, true), 0);
         if (!empty($Data)) {
             foreach ($Data as $key => $value) {
                 $this->SendDebug(__FUNCTION__, 'Data[' . $key . '] = ' . json_encode($value), 0);
@@ -22,38 +25,37 @@ trait LS_messageSink
             // $Data[1] = difference to last value
             // $Data[2] = last value
             case VM_UPDATE:
-
+                // Light
+                $light = $this->ReadPropertyInteger('Light');
+                if ($light != 0 && @IPS_ObjectExists($light)) {
+                    if ($SenderID == $light) {
+                        if ($Data[1]) {
+                            $scriptText = 'LS_UpdateLightStatus(' . $this->InstanceID . ');';
+                            IPS_RunScriptText($scriptText);
+                        }
+                    }
+                }
                 // Sunrise
-                $sunrise = json_decode($this->ReadPropertyString('Sunrise'), true)[0];
-                if (!empty($sunrise)) {
-                    if ($sunrise['UseSettings']) {
-                        $id = $sunrise['ID'];
-                        if ($id != 0 && @IPS_ObjectExists($id)) {
-                            if ($SenderID == $id) {
-                                if ($Data[1]) {
-                                    $scriptText = 'LS_ExecuteSunriseSunsetAction(' . $this->InstanceID . ', ' . $SenderID . ', 0);';
-                                    IPS_RunScriptText($scriptText);
-                                }
-                            }
+                $sunrise = $this->ReadPropertyInteger('Sunrise');
+                if ($sunrise != 0 && @IPS_ObjectExists($sunrise)) {
+                    if ($SenderID == $sunrise) {
+                        if ($Data[1]) {
+                            $scriptText = 'LS_ExecuteSunriseSunsetAction(' . $this->InstanceID . ', ' . $SenderID . ', 0);';
+                            IPS_RunScriptText($scriptText);
                         }
                     }
                 }
                 // Sunset
-                $sunset = json_decode($this->ReadPropertyString('Sunset'), true)[0];
-                if (!empty($sunset)) {
-                    if ($sunset['UseSettings']) {
-                        $id = $sunset['ID'];
-                        if ($id != 0 && @IPS_ObjectExists($id)) {
-                            if ($SenderID == $id) {
-                                if ($Data[1]) {
-                                    $scriptText = 'LS_ExecuteSunriseSunsetAction(' . $this->InstanceID . ', ' . $SenderID . ', 1);';
-                                    IPS_RunScriptText($scriptText);
-                                }
-                            }
+                $sunset = $this->ReadPropertyInteger('Sunset');
+                if ($sunset != 0 && @IPS_ObjectExists($sunset)) {
+                    if ($SenderID == $sunset) {
+                        if ($Data[1]) {
+                            $scriptText = 'LS_ExecuteSunriseSunsetAction(' . $this->InstanceID . ', ' . $SenderID . ', 1);';
+                            IPS_RunScriptText($scriptText);
                         }
                     }
                 }
-                // Is day
+                /// Is day
                 $id = $this->ReadPropertyInteger('IsDay');
                 if ($id != 0 && @IPS_ObjectExists($id)) {
                     if ($SenderID == $id) {
@@ -96,7 +98,7 @@ trait LS_messageSink
             // $Data[0] = last run
             // $Data[1] = next run
             case EM_UPDATE:
-                // Weekly schedule
+                /// Weekly schedule
                 $scriptText = 'LS_ExecuteWeeklyScheduleAction(' . $this->InstanceID . ');';
                 IPS_RunScriptText($scriptText);
                 break;
@@ -124,25 +126,23 @@ trait LS_messageSink
     {
         // Unregister first
         $this->UnregisterMessages();
+        if ($this->CheckMaintenanceMode()) {
+            return;
+        }
+        // Light
+        $id = $this->ReadPropertyInteger('Light');
+        if ($id != 0 && @IPS_ObjectExists($id)) {
+            $this->RegisterMessage($id, VM_UPDATE);
+        }
         // Sunrise
-        $sunrise = json_decode($this->ReadPropertyString('Sunrise'), true)[0];
-        if (!empty($sunrise)) {
-            if ($sunrise['UseSettings']) {
-                $id = $sunrise['ID'];
-                if ($id != 0 && @IPS_ObjectExists($id)) {
-                    $this->RegisterMessage($id, VM_UPDATE);
-                }
-            }
+        $id = $this->ReadPropertyInteger('Sunrise');
+        if ($id != 0 && @IPS_ObjectExists($id)) {
+            $this->RegisterMessage($id, VM_UPDATE);
         }
         // Sunset
-        $sunset = json_decode($this->ReadPropertyString('Sunset'), true)[0];
-        if (!empty($sunset)) {
-            if ($sunset['UseSettings']) {
-                $id = $sunset['ID'];
-                if ($id != 0 && @IPS_ObjectExists($id)) {
-                    $this->RegisterMessage($id, VM_UPDATE);
-                }
-            }
+        $id = $this->ReadPropertyInteger('Sunset');
+        if ($id != 0 && @IPS_ObjectExists($id)) {
+            $this->RegisterMessage($id, VM_UPDATE);
         }
         // Weekly schedule
         $id = $this->ReadPropertyInteger('WeeklySchedule');

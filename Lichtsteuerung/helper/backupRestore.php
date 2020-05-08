@@ -31,7 +31,7 @@ trait LS_backupRestore
     //#################### Restore
 
     /**
-     * Restores a configuration form selected script.
+     * Restores a configuration form a selected script.
      *
      * @param int $ConfigurationScript
      */
