@@ -170,4 +170,77 @@ trait LS_switchLight
             IPS_Sleep($Delay * 1000);
         }
     }
+
+    /**
+     * Updates the light status
+     */
+    private function UpdateLightStatus(): void
+    {
+        $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
+        $id = $this->ReadPropertyInteger('Light');
+        if ($id != 0 && @IPS_ObjectExists($id)) {
+            $updateStatus = $this->ReadPropertyBoolean('LightUpdateStatus');
+            if (!$updateStatus) {
+                $this->SendDebug(__FUNCTION__, 'Abbruch, die Statusaktualisierung ist deaktiviert!', 0);
+            }
+            $variableType = @IPS_GetVariable($id)['VariableType'];
+            switch ($variableType) {
+                // Boolean
+                case 0:
+                    $actualValue = boolval(GetValue($id));
+                    $mode = intval(0);
+                    $brightness = intval(0);
+                    if ($actualValue) {
+                        $mode = intval(2);
+                        $brightness = intval(100);
+                    }
+                    break;
+
+                // Integer
+                case 1:
+                    $actualValue = intval(GetValue($id));
+                    $mode = intval(0);
+                    $brightness = intval(0);
+                    if ($actualValue > 0) {
+                        $mode = intval(2);
+                        $brightness = intval($actualValue);
+                    }
+                    break;
+
+                // Float
+                case 2:
+                    $actualValue = floatval(GetValue($id));
+                    $mode = intval(0);
+                    $brightness = intval(0);
+                    if ($actualValue > 0) {
+                        $mode = intval(2);
+                        $brightness = intval($actualValue * 100);
+                    }
+                    break;
+
+                default:
+                    $this->SendDebug(__FUNCTION__, 'Abbruch, der Variablentyp wird nicht unterstützt!', 0);
+            }
+            if (isset($mode) && isset($brightness)) {
+                $this->SendDebug(__FUNCTION__, 'Neuer Modus: ' . $mode . ', Neue Helligkeit: ' . $brightness . '%.', 0);
+                $update = true;
+                $actualLightMode = $this->GetValue('LightMode');
+                if ($mode == 2 && $actualLightMode == 1) { // on & timer is running
+                    $update = false;
+                }
+                if ($update) {
+                    if ($actualLightMode != 1) {
+                        $this->SetValue('LightMode', $mode);
+                        $this->SetValue('Dimmer', $brightness);
+                        $this->SetClosestDimmingPreset($brightness);
+                    }
+                }
+                if ($this->ReadPropertyBoolean('LightUpdateLastBrightness')) {
+                    $this->SetValue('LastBrightness', $brightness);
+                }
+            }
+        } else {
+            $this->SendDebug(__FUNCTION__, 'Abbruch, es ist kein Licht zum Schalten vorhanden!', 0);
+        }
+    }
 }
