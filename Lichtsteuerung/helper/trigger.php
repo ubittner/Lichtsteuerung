@@ -35,6 +35,11 @@ trait LS_trigger
                             if (!$checkConditions) {
                                 return;
                             }
+                            // Check time
+                            $checkTime = $this->CheckTimeCondition($setting['ExecutionTimeAfter'], $setting['ExecutionTimeBefore']);
+                            if (!$checkTime) {
+                                return;
+                            }
                             // Trigger action
                             $this->TriggerExecutionDelay(intval($setting['ExecutionDelay']));
                             $brightness = intval($setting['Brightness']);

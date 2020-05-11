@@ -26,11 +26,11 @@
         },
         {
           "type": "Label",
-          "caption": "Version:\t\t\t2.00-25"
+          "caption": "Version:\t\t\t2.00-26"
         },
         {
           "type": "Label",
-          "caption": "Datum:\t\t\t08. Mai 2020"
+          "caption": "Datum:\t\t\t11. Mai 2020"
         },
         {
           "type": "Label",
@@ -4463,6 +4463,24 @@
                     "value": 2
                   }
                 ]
+              }
+            },
+            {
+              "name": "ExecutionTimeAfter",
+              "caption": "Ausführung nach",
+              "width": "150px",
+              "add": "{\"hour\":0,\"minute\":0,\"second\":0}",
+              "edit": {
+                "type": "SelectTime"
+              }
+            },
+            {
+              "name": "ExecutionTimeBefore",
+              "caption": "Ausführung vor",
+              "width": "150px",
+              "add": "{\"hour\":0,\"minute\":0,\"second\":0}",
+              "edit": {
+                "type": "SelectTime"
               }
             }
           ]

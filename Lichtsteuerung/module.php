@@ -12,9 +12,9 @@
  * @license     CC BY-NC-SA 4.0
  *              https://creativecommons.org/licenses/by-nc-sa/4.0/
  *
- * @version     2.00-25
- * @date        2020-05-08, 18:00, 1588957200
- * @review      2020-05-08, 18:00
+ * @version     2.00-26
+ * @date        2020-05-11, 18:00, 1589216400
+ * @review      2020-05-11, 18:00
  *
  * @see         https://github.com/ubittner/Lichtsteuerung
  *
