@@ -424,7 +424,6 @@ trait LS_checkConditions
         $timeAfterMinute = $timeAfter->minute;
         $timeAfterSecond = $timeAfter->second;
         $timestampAfter = mktime($timeAfterHour, $timeAfterMinute, $timeAfterSecond, (int) date('n'), (int) date('j'), (int) date('Y'));
-        $this->SendDebug(__FUNCTION__, 'Bedingung Uhrzeit nach: ' . date('H:i:s', $timestampAfter) . ', ' . $timestampAfter . ', ' . date('d.m.Y', $timestampAfter), 0);
         // Time before
         $timeBefore = json_decode($ExecutionTimeBefore);
         $timeBeforeHour = $timeBefore->hour;
@@ -432,6 +431,7 @@ trait LS_checkConditions
         $timeBeforeSecond = $timeBefore->second;
         $timestampBefore = mktime($timeBeforeHour, $timeBeforeMinute, $timeBeforeSecond, (int) date('n'), (int) date('j'), (int) date('Y'));
         if ($timestampAfter != $timestampBefore) {
+            $this->SendDebug(__FUNCTION__, 'Bedingung Uhrzeit nach: ' . date('H:i:s', $timestampAfter) . ', ' . $timestampAfter . ', ' . date('d.m.Y', $timestampAfter), 0);
             // Same day
             if ($timestampAfter <= $timestampBefore) {
                 $this->SendDebug(__FUNCTION__, 'Bedingung Uhrzeit vor: ' . date('H:i:s', $timestampBefore) . ', ' . $timestampBefore . ', ' . date('d.m.Y', $timestampBefore), 0);
@@ -455,6 +455,8 @@ trait LS_checkConditions
                     $result = false;
                 }
             }
+        } else {
+            $this->SendDebug(__FUNCTION__, 'Aktuelle Zeit liegt im definierten Zeitraum.', 0);
         }
         return $result;
     }
