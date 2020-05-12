@@ -402,7 +402,16 @@ trait LS_checkConditions
         return $result;
     }
 
-    private function CheckTimeCondition(string $TimeAfter, string $TimeBefore): bool
+    /**
+     * Checks the execution time.
+     *
+     * @param string $ExecutionTimeAfter
+     * @param string $ExecutionTimeBefore
+     * @return bool
+     * false    = mismatch
+     * true     = condition is valid
+     */
+    private function CheckTimeCondition(string $ExecutionTimeAfter, string $ExecutionTimeBefore): bool
     {
         $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
         $result = true;
@@ -410,14 +419,14 @@ trait LS_checkConditions
         $actualTime = time();
         $this->SendDebug(__FUNCTION__, 'Aktuelle Uhrzeit: ' . date('H:i:s', $actualTime) . ', ' . $actualTime . ', ' . date('d.m.Y', $actualTime), 0);
         // Time after
-        $timeAfter = json_decode($TimeAfter);
+        $timeAfter = json_decode($ExecutionTimeAfter);
         $timeAfterHour = $timeAfter->hour;
         $timeAfterMinute = $timeAfter->minute;
         $timeAfterSecond = $timeAfter->second;
         $timestampAfter = mktime($timeAfterHour, $timeAfterMinute, $timeAfterSecond, (int) date('n'), (int) date('j'), (int) date('Y'));
         $this->SendDebug(__FUNCTION__, 'Bedingung Uhrzeit nach: ' . date('H:i:s', $timestampAfter) . ', ' . $timestampAfter . ', ' . date('d.m.Y', $timestampAfter), 0);
         // Time before
-        $timeBefore = json_decode($TimeBefore);
+        $timeBefore = json_decode($ExecutionTimeBefore);
         $timeBeforeHour = $timeBefore->hour;
         $timeBeforeMinute = $timeBefore->minute;
         $timeBeforeSecond = $timeBefore->second;
