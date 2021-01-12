@@ -200,6 +200,7 @@ trait LS_checkConditions
         $this->SendDebug(__FUNCTION__, 'Die Methode wird ausgeführt. (' . microtime(true) . ')', 0);
         $result = true;
         $lightStatus = intval($this->GetValue('LightMode')); // false = light is off, true = light is on
+        $this->SendDebug(__FUNCTION__, 'LightMode' . json_encode($lightStatus), 0);
         switch ($Condition) {
             // Light must be off
             case 1:
