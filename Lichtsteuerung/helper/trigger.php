@@ -49,10 +49,10 @@ trait LS_trigger
                             $dutyCycle = intval($setting['DutyCycle']);
                             $dutyCycleUnit = intval($setting['DutyCycleUnit']);
                             $this->SwitchLight($brightness, $dutyCycle, $dutyCycleUnit);
+                            return; # only one condition
                         } else {
                             $this->SendDebug(__FUNCTION__, 'Die Variable ' . $VariableID . ' hat nicht ausgelöst.', 0);
                         }
-                        return; # only one condition
                     }
                 }
             }
