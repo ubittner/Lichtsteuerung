@@ -20,6 +20,7 @@ trait LS_trigger
         if (!empty($settings)) {
             foreach ($settings as $setting) {
                 $id = $setting['ID'];
+                $this->SendDebug(__FUNCTION__, 'ID: ' . $id, 0);
                 if ($VariableID == $id) {
                     if ($setting['UseSettings']) {
                         $this->SendDebug(__FUNCTION__, 'Die Variable ' . $VariableID . ' wurde aktualisiert.', 0);
@@ -31,13 +32,17 @@ trait LS_trigger
                         if ($actualValue == $triggerValue) {
                             $this->SendDebug(__FUNCTION__, 'Die Variable ' . $VariableID . ' hat ausgelöst.', 0);
                             // Check conditions
+                            $this->SendDebug(__FUNCTION__, 'Settings: ' . json_encode($setting), 0);
                             $checkConditions = $this->CheckAllConditions(json_encode($setting));
+                            $this->SendDebug(__FUNCTION__, 'Result checkConditions: ' . json_encode($checkConditions), 0);
                             if (!$checkConditions) {
+                                $this->SendDebug(__FUNCTION__, 'Kondition nicht erfüllt!', 0);
                                 continue;
                             }
                             // Check time
                             $checkTime = $this->CheckTimeCondition($setting['ExecutionTimeAfter'], $setting['ExecutionTimeBefore']);
                             if (!$checkTime) {
+                                $this->SendDebug(__FUNCTION__, 'Zeit nicht erfüllt!', 0);
                                 continue;
                             }
                             // Trigger action
@@ -49,7 +54,7 @@ trait LS_trigger
                             $dutyCycle = intval($setting['DutyCycle']);
                             $dutyCycleUnit = intval($setting['DutyCycleUnit']);
                             $this->SwitchLight($brightness, $dutyCycle, $dutyCycleUnit);
-                            return; # only one condition
+                            die; # only one condition
                         } else {
                             $this->SendDebug(__FUNCTION__, 'Die Variable ' . $VariableID . ' hat nicht ausgelöst.', 0);
                         }
