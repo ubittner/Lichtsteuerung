@@ -52,6 +52,7 @@ trait LS_trigger
                         } else {
                             $this->SendDebug(__FUNCTION__, 'Die Variable ' . $VariableID . ' hat nicht ausgelöst.', 0);
                         }
+                        return; # only one condition
                     }
                 }
             }
