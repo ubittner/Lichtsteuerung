@@ -33,12 +33,12 @@ trait LS_trigger
                             // Check conditions
                             $checkConditions = $this->CheckAllConditions(json_encode($setting));
                             if (!$checkConditions) {
-                                return;
+                                continue;
                             }
                             // Check time
                             $checkTime = $this->CheckTimeCondition($setting['ExecutionTimeAfter'], $setting['ExecutionTimeBefore']);
                             if (!$checkTime) {
-                                return;
+                                continue;
                             }
                             // Trigger action
                             $this->TriggerExecutionDelay(intval($setting['ExecutionDelay']));
