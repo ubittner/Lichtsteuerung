@@ -30,7 +30,8 @@ trait LS_messageSink
                 if ($light != 0 && @IPS_ObjectExists($light)) {
                     if ($SenderID == $light) {
                         if ($Data[1]) {
-                            $this->UpdateLightStatus();
+                            $scriptText = 'LS_UpdateLightStatus(' . $this->InstanceID . ');';
+                            IPS_RunScriptText($scriptText);
                         }
                     }
                 }

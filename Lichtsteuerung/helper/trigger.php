@@ -35,26 +35,23 @@ trait LS_trigger
                             $this->SendDebug(__FUNCTION__, 'Settings: ' . json_encode($setting), 0);
                             $checkConditions = $this->CheckAllConditions(json_encode($setting));
                             $this->SendDebug(__FUNCTION__, 'Result checkConditions: ' . json_encode($checkConditions), 0);
-                            if (!$checkConditions) {
-                                $this->SendDebug(__FUNCTION__, 'Kondition nicht erfüllt!', 0);
-                                continue;
+                            if ($checkConditions) {
+                                $this->SendDebug(__FUNCTION__, 'Alle Bedingungen  erfüllt!', 0);
+                                // Check time
+                                $checkTime = $this->CheckTimeCondition($setting['ExecutionTimeAfter'], $setting['ExecutionTimeBefore']);
+                                if ($checkTime) {
+                                    // Trigger action
+                                    $this->TriggerExecutionDelay(intval($setting['ExecutionDelay']));
+                                    $brightness = intval($setting['Brightness']);
+                                    if ($setting['UpdateLastBrightness']) {
+                                        $this->SetValue('LastBrightness', $brightness);
+                                    }
+                                    $dutyCycle = intval($setting['DutyCycle']);
+                                    $dutyCycleUnit = intval($setting['DutyCycleUnit']);
+                                    $this->SwitchLight($brightness, $dutyCycle, $dutyCycleUnit);
+                                    return;
+                                }
                             }
-                            // Check time
-                            $checkTime = $this->CheckTimeCondition($setting['ExecutionTimeAfter'], $setting['ExecutionTimeBefore']);
-                            if (!$checkTime) {
-                                $this->SendDebug(__FUNCTION__, 'Zeit nicht erfüllt!', 0);
-                                continue;
-                            }
-                            // Trigger action
-                            $this->TriggerExecutionDelay(intval($setting['ExecutionDelay']));
-                            $brightness = intval($setting['Brightness']);
-                            if ($setting['UpdateLastBrightness']) {
-                                $this->SetValue('LastBrightness', $brightness);
-                            }
-                            $dutyCycle = intval($setting['DutyCycle']);
-                            $dutyCycleUnit = intval($setting['DutyCycleUnit']);
-                            $this->SwitchLight($brightness, $dutyCycle, $dutyCycleUnit);
-                            die; # only one condition
                         } else {
                             $this->SendDebug(__FUNCTION__, 'Die Variable ' . $VariableID . ' hat nicht ausgelöst.', 0);
                         }
