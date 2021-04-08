@@ -21,11 +21,11 @@ trait LS_sunriseSunset
         }
         $modeName = 'Sonnenaufgang';
         $variableName = 'Sunrise';
-        $actionName = 'SunriseAction';
+        $actionName = 'SunriseActions';
         if ($Mode == 1) {
             $modeName = 'Sonnenuntergang';
             $variableName = 'Sunset';
-            $actionName = 'SunsetAction';
+            $actionName = 'SunsetActions';
         }
         $this->SendDebug(__FUNCTION__, 'Die Variable ' . $VariableID . ' (' . $modeName . ') hat sich geändert!', 0);
         $action = $this->CheckAction($variableName, $actionName);
