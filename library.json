@@ -1,12 +1,12 @@
 {
-  "id": "{46195F9D-0325-41E2-B83B-A1192293BE4E}",
-  "author": "Ulrich Bittner",
-  "name": "Lichtsteuerung",
-  "url": "https://github.com/ubittner/Lichtsteuerung",
-  "compatibility": {
-    "version": "5.3"
-  },
-  "version": "2.00",
-  "build": 31,
-  "date": 1617857970
+    "id": "{46195F9D-0325-41E2-B83B-A1192293BE4E}",
+    "name": "Lichtsteuerung",
+    "author": "Ulrich Bittner",
+    "url": "https://github.com/ubittner/Lichtsteuerung",
+    "compatibility": {
+        "version": "6.1"
+    },
+    "version": "3.0",
+    "build": 1,
+    "date": 1696317932
 }

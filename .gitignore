@@ -1,0 +1,6 @@
+.DS_Store
+.idea/
+.phpunit.*
+.php_cs.cache
+dev/
+docs/developer.txt

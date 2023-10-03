@@ -1,14 +1,14 @@
 {
-  "id": "{14AE3EA4-76F6-4A36-BE98-628A4CB1EAC7}",
-  "name": "Lichtsteuerung",
-  "type": 3,
-  "vendor": "NTUB",
-  "url": "https://github.com/ubittner/Lichtsteuerung",
-  "aliases": [
-    "Lichtsteuerung"
-  ],
-  "parentRequirements": [],
-  "childRequirements": [],
-  "implemented": [],
-  "prefix": "LS"
+    "id": "{14AE3EA4-76F6-4A36-BE98-628A4CB1EAC7}",
+    "name": "Lichtsteuerung",
+    "type": 3,
+    "vendor": "Ulrich Bittner",
+    "url": "https://github.com/ubittner/Lichtsteuerungtree/main/Lichtsteuerung",
+    "aliases": [
+        "Lichtsteuerung"
+    ],
+    "parentRequirements": [],
+    "childRequirements": [],
+    "implemented": [],
+    "prefix": "LS"
 }
